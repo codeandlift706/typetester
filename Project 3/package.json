@@ -1,0 +1,19 @@
+{
+  "name": "project-3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server --ignore client",
+    "develop": "concurrently \"npm run start-server\" \"npm run start-client\"",
+    "install": "cd server && npm install && cd ../client && npm install",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build",
+    "start-server": "cd server && npm run start",
+    "start-client": "cd client && npm run dev"
+  },
+  
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
