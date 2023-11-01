@@ -12,7 +12,7 @@ const promptdata = [
 
 prompts.insertMany(promptdata)
 .then(() => {
-    console.log('Porompts inserted!');
+    console.log('Prompts inserted!');
 })
 .catch((err) => {
     console.error('Error seeding quotes', err);
