@@ -12,8 +12,10 @@
     "start-server": "cd server && npm run start",
     "start-client": "cd client && npm run dev"
   },
-  
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }
