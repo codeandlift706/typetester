@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-// import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { ADD_USER } from '../utils/mutations'
 
-function SignupForm(props) {
+function SignupForm(props) { //do we need props?
     const [formState, setFormState] = useState({ firstName: '', lastName: '', username: '', email: '', password: '' });
     const [addUser] = useMutation(ADD_USER);
 
@@ -29,81 +28,81 @@ function SignupForm(props) {
             ...formState,
             [name]: value,
         });
+
+        setUserFormData({ //reset the fields
+            firstName: '',
+            lastName: '',
+            username: '',
+            email: '',
+            password: '',
+        });
     };
-
-    // setUserFormData({ //reset the fields
-    //     firstName: '',
-    //     lastName: '',
-    //     username: '',
-    //     email: '',
-    //     password: '',
-    // });
-
-
-
-
-
-
 
 
     return (
-        <>
-            {/* This is needed for the validation functionality above */}
-            {/* <Form noValidate validated={validated} onSubmit={handleFormSubmit}> */}
-            <Form onSubmit={handleFormSubmit}>
-                {/* show alert if server response is bad */}
-                {/* <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-                    Something went wrong with your signup!
-                </Alert> */}
+        <div className="container">
+            {/* <Link to="/login">← Go to Login</Link> */}
 
-                <Form.Group className='mb-3'>
-                    <Form.Label htmlFor='username'>Username</Form.Label>
-                    <Form.Control
-                        type='text'
-                        placeholder='Your username'
-                        name='username'
-                        onChange={handleInputChange}
-                        value={userFormData.username}
-                        required
+            <h2>Signup</h2>
+            <form onSubmit={handleFormSubmit}>
+                <div>
+                    <label htmlFor="firstName">First Name:</label>
+                    <input
+                        placeholder="First"
+                        name="firstName"
+                        type="firstName"
+                        id="firstName"
+                        onChange={handleChange}
                     />
-                    <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group className='mb-3'>
-                    <Form.Label htmlFor='email'>Email</Form.Label>
-                    <Form.Control
-                        type='email'
-                        placeholder='Your email address'
-                        name='email'
-                        onChange={handleInputChange}
-                        value={userFormData.email}
-                        required
+                </div>
+                <div>
+                    <label htmlFor="lastName">Last Name:</label>
+                    <input
+                        placeholder="Last"
+                        name="lastName"
+                        type="lastName"
+                        id="lastName"
+                        onChange={handleChange}
                     />
-                    <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group className='mb-3'>
-                    <Form.Label htmlFor='password'>Password</Form.Label>
-                    <Form.Control
-                        type='password'
-                        placeholder='Your password'
-                        name='password'
-                        onChange={handleInputChange}
-                        value={userFormData.password}
-                        required
+                </div>
+                <div>
+                    <label htmlFor="email">Username:</label>
+                    <input
+                        placeholder="username"
+                        name="username"
+                        type="username"
+                        id="username"
+                        onChange={handleChange}
                     />
-                    <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-                </Form.Group>
-                <Button
-                    disabled={!(userFormData.username && userFormData.email && userFormData.password)}
-                    type='submit'
-                    variant='success'>
-                    Submit
-                </Button>
-            </Form>
-        </>
+                </div>
+                <div>
+                    <label htmlFor="email">Email:</label>
+                    <input
+                        placeholder="youremail@test.com"
+                        name="email"
+                        type="email"
+                        id="email"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="pwd">Password:</label>
+                    <input
+                        placeholder="******"
+                        name="password"
+                        type="password"
+                        id="pwd"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
     );
-};
+}
+
 
 export default SignupForm;
 
