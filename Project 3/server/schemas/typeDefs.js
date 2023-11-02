@@ -6,6 +6,7 @@ const typeDefs = gql`
         _id: ID
         firstName: String
         lastName: String
+        username: String
         email: String
         password: String
     }
@@ -15,13 +16,25 @@ const typeDefs = gql`
         user: User
     }
 
-    type Query {
-        user: User
+    type Score {
+        _id: ID
+        score: Int
+        user(_id: ID!): User
+        createdAt: String
+    }
+
+    type Query { 
+        users: [User]
+        user(_id: ID!): User
+        scores: [Score]
     }
 
     type Mutation {
-        login(email: String!, password: String!): Auth
-        addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+        login(username: String!, password: String!): Auth
+        addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
+        updateUser(firstName: String, lastName: String, username: String, email: String, password: String): User
+        removeUser(_id: ID!): User
+        removeScore(_id: ID!): Score
     }
 `;
 

@@ -14,15 +14,28 @@ const userSchema = new Schema({
         required: true,
         trim: true
     },
-    email: {
-        type: String,
-        unique: true
-    },
-    password: {
+    username: {
         type: String,
         required: true,
-        minlength: 5
+        trim: true,
+        unique: true
     },
+    email: {
+    type: String,
+    required: true,
+    unique: true
+},
+    password: {
+    type: String,
+    required: true,
+    minlength: 5
+},
+    score: [
+    {
+        type: Schema.Types.ObjectId,
+        ref: 'Score'
+    }
+]
 });
 
 // set up pre-save middleware to create password
