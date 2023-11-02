@@ -1,7 +1,4 @@
-// GraphQL type definitions for User and Auth
-const { gql } = require('apollo-server-express');
-
-const typeDefs = gql`
+const typeDefs = `
     type User {
         _id: ID
         firstName: String
