@@ -5,7 +5,11 @@ const { Schema } = mongoose;
 const scoreSchema = new Schema({
     score: {
         type: Number,
-        required: true
+        required: true,
+        createdAt: {
+            type: Date,
+            default: Date.now
+        }
     },
     user: {
         type: Schema.Types.ObjectId,
