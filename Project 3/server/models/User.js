@@ -23,6 +23,12 @@ const userSchema = new Schema({
         required: true,
         minlength: 5
     },
+    score: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Score'
+        }
+    ]
 });
 
 // set up pre-save middleware to create password
