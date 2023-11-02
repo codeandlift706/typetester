@@ -33,8 +33,8 @@ const typeDefs = gql`
         login(username: String!, password: String!): Auth
         addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
         updateUser(firstName: String, lastName: String, username: String, email: String, password: String): User
-        deleteUser(_id: ID!): User
-        deleteScore(_id: ID!): Score
+        removeUser(_id: ID!): User
+        removeScore(_id: ID!): Score
     }
 `;
 
