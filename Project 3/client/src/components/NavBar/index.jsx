@@ -40,7 +40,7 @@ function NavBar() {
     return (
         <header className="flex-row px-1">
             <h1>
-                <Link to="/scoreboard">
+                <Link to="/score">
                     scoreboard
                 </Link>
             </h1>

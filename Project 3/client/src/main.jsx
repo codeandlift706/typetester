@@ -26,7 +26,7 @@ const router = createBrowserRouter([
                 element: <Profile />
             },
             {
-                path: 'score',
+                path: '/score',
                 element: <Score/>
             },
             {

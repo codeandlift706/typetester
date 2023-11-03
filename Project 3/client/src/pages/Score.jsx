@@ -1,10 +1,9 @@
-
+import Scoreboard from '../components/Scoreboard';
 
 
 const Score = () => {
   return (
-    <div className="container">
-    </div>
+<Scoreboard />
   );
 };
 
