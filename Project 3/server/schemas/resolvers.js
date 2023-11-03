@@ -3,7 +3,7 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        users: async () => { //GOOD
+        users: async () => { //GOOD -- do we still need? this or query scores can be for scoreboard?
             return User.find().populate('scores');
         },
 
@@ -11,8 +11,8 @@ const resolvers = {
             return User.findOne({ username }).populate('scores');
         },
 
-        scores: async (parent, { username }) => { //GOOD
-            const params = username ? { username } : {};
+        scores: async (parent, { userId }) => { //REVIEW!!!
+            const params = userId ? { userId } : {};
             return Score.find(params).sort({ createdAt: -1 }); //latest score first
         },
     },
@@ -66,6 +66,7 @@ const resolvers = {
             throw AuthenticationError;
             ('You need to be logged in!');
         },
+
 
         removeScore: async (parent, { userId, scoreId }, context) => { //GOOD
             if (context.user) {
