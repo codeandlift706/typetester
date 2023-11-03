@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
@@ -7,7 +6,7 @@ import { QUERY_USER, QUERY_ME } from '../utils/queries';
 // import { DELETE_USER } from '../utils/mutations';
 import { UPDATE_USER } from '../utils/mutations';
 
-const Profile = () => {
+const Profile = ({ user }) => {
 
   const { username: userParam } = useParams();
 
@@ -21,6 +20,7 @@ const Profile = () => {
   // const [deleteUser, { error }] = useMutation(DELETE_USER); //Create a custom hook for this?? create a new function where it equals this whole thing
 
   const userData = data?.user || {}; //check if data has user property
+  console.log(userData);
 
 
   // const handleDeleteUser = async (userId) => {
@@ -79,20 +79,15 @@ const Profile = () => {
     });
   };
 
-  // navigate to personal profile page if username is yours
-  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-    <Link to="/me">
-      profile
-    </Link>
-  }
 
   if (loading) {
     return <div>Loading...</div>;
   }
   return (
     <div>
+      {/* Why isn't it showing? */}
       <h2>
-        Logged in as ({userData.username})
+        Logged in as {userData.username} 
       </h2>
 
       {/* Update your username */}
