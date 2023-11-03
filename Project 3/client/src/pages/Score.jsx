@@ -1,4 +1,4 @@
-
+import Scoreboard from '../components/Scoreboard';
 
 
 const Score = () => {
