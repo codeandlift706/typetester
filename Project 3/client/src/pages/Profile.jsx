@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
-import Auth from '../../utils/auth';
+import Auth from '../utils/auth';
 //import { QUERY_ME } from '../utils/queries';
-import { QUERY_USER } from '../../utils/queries';
-import { DELETE_USER } from '../../utils/mutations';
-import { UPDATE_USER } from '../../utils/mutations';
+import { QUERY_USER } from '../utils/queries';
+import { DELETE_USER } from '../utils/mutations';
+import { UPDATE_USER } from '../utils/mutations';
 
 const Profile = () => {
 
