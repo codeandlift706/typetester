@@ -8,8 +8,8 @@ function NavBar() {
             return (
                 <ul className="flex-row">
                     <li className="mx-1">
-                        <Link to="/home">
-                            something? home?
+                        <Link to="/home"> /* if the user is logged in, do we want them to see their profile? */
+                            Home 
                         </Link>
                     </li>
                     <li className="mx-1">
@@ -28,7 +28,7 @@ function NavBar() {
                         </Link>
                     </li>
                     <li className="mx-1">
-                        <Link to="/login">
+                        <Link to="/loginForm">
                             login
                         </Link>
                     </li>
@@ -41,7 +41,7 @@ function NavBar() {
         <header className="flex-row px-1">
             <h1>
                 <Link to="/scoreboard">
-                    high scores
+                    scoreboard
                 </Link>
             </h1>
 
