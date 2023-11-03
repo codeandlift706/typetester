@@ -1,10 +1,20 @@
 
-function TestArea({typingText}) {
+function TestArea({ typingText }) {
 
     return (
-        <div className="section">
+        <div className="gameBox">
             <div className="inputArea">
-                <p id="paragraph">{typingText}</p>
+                <p id="prompt">{typingText}</p>
+            </div>
+            <div className="results">
+                <ul className="resultsList">
+                    <li className="time">
+                        <p>Time</p>
+                    </li>
+                    <li>
+                        <p>WPM</p>
+                    </li>
+                </ul>
             </div>
         </div>
     );
