@@ -9,7 +9,7 @@ function NavBar() {
                 <ul className="flex-row">
                     <li className="mx-1">
                         <Link to="/home">
-                            something
+                            something? home?
                         </Link>
                     </li>
                     <li className="mx-1">
