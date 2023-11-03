@@ -8,7 +8,7 @@ import { DELETE_SCORE } from '../../utils/mutations';
 
 
 //we need to pass in the user & the score ??????
-const Scoreboard = ({ user, scores }) => {
+const Scoreboard = () => {
 
     // const { loading, data } = useQuery(QUERY_SCORES);
     // , { 
