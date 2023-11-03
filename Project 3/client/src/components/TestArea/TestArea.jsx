@@ -1,22 +1,23 @@
-import React, { useState } from 'react';
 
-function TestArea({ testText, onTestStart }) {
-  const [inputValue, setInputValue] = useState('');
+function TestArea({ typingText }) {
 
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
-
-  const handleStartClick = () => {
-    onTestStart(inputValue);
-  };
-
-  return (
-    <div>
-      <textarea value={inputValue} onChange={handleInputChange} />
-      <button onClick={handleStartClick}>Start Test</button>
-    </div>
-  );
-}
+    return (
+        <div className="gameBox">
+            <div className="inputArea">
+                <p id="prompt">{typingText}</p>
+            </div>
+            <div className="results">
+                <ul className="resultsList">
+                    <li className="time">
+                        <p>Time</p>
+                    </li>
+                    <li>
+                        <p>WPM</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    );
+};
 
 export default TestArea;
