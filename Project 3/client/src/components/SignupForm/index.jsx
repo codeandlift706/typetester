@@ -29,7 +29,7 @@ function SignupForm(props) { //do we need props?
             [name]: value,
         });
 
-        setUserFormData({ //reset the fields
+        setFormState({ //reset the fields
             firstName: '',
             lastName: '',
             username: '',
@@ -66,7 +66,7 @@ function SignupForm(props) { //do we need props?
                     />
                 </div>
                 <div>
-                    <label htmlFor="email">Username:</label>
+                    <label htmlFor="username">Username:</label>
                     <input
                         placeholder="username"
                         name="username"
