@@ -5,21 +5,28 @@ import { ADD_USER } from '../../utils/mutations'
 
 function SignupForm(props) { //do we need props?
     const [formState, setFormState] = useState({ firstName: '', lastName: '', username: '', email: '', password: '' });
-    const [addUser] = useMutation(ADD_USER);
+    const [addUser, { error }] = useMutation(ADD_USER);
+
+    // useEffect(() => {
+    //     if (error) {
+    //         setShowAlert(true);
+    //     } else {
+    //         setShowAlert(false);
+    //     }
+    // }, [error])
+
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        const mutationResponse = await addUser({
-            variables: {
-                firstName: formState.firstName,
-                lastName: formState.lastName,
-                username: formState.username,
-                email: formState.email,
-                password: formState.password,
-            },
-        });
-        const token = mutationResponse.data.addUser.token;
-        Auth.login(token);
+        try {
+            const { data } = await addUser({
+                variables: { ...formState},
+            });
+            const token = data.addUser.token;
+            Auth.login(token);
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     const handleChange = (event) => {
