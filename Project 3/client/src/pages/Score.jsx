@@ -3,8 +3,7 @@
 
 const Score = () => {
   return (
-    <div className="container">
-    </div>
+<Scoreboard />
   );
 };
 

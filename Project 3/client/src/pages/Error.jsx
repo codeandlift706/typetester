@@ -6,7 +6,7 @@ export default function Error() {
         <div>
         <h1>Oops!</h1>
         <p>Something went wrong:</p>
-        <pre>{error.stack}</pre>
+        {/* <pre>{error.stack}</pre> */}
         </div>
     );
     }
