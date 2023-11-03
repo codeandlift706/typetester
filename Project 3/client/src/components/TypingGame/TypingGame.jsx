@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import TestArea from '../TestArea/TestArea';
+import React, { useState, useEffect, useRef } from 'react';
 import './TypingGame.css';
 
 function TypingGame() {
     const prompts = [
         'The quick brown fox jumps over the lazy dog',
-        'She sells seashells by the seashore',
         'Peter Piper picked a peck of pickled peppers',
         'How much wood would a woodchuck chuck',
         'Sally sells seashells down by the seashore'
@@ -13,7 +11,12 @@ function TypingGame() {
 
     const [typingText, setTypingText] = useState('');
     const [userInput, setUserInput] = useState('');
+    const [startTime, setStartTime] = useState(null);
+    const [endTime, setEndTime] = useState(null);
     const [wpm, setWpm] = useState(0);
+    const [elapsedTime, setElapsedTime] = useState(0);
+
+    const inputRef = useRef(null);
 
     const loadPrompt = () => {
         const randomPrompt = Math.floor(Math.random() * prompts.length);
@@ -24,15 +27,24 @@ function TypingGame() {
     const handleInputChange = (event) => {
         const input = event.target.value;
         setUserInput(input);
+    
+        if (startTime === null) {
+            setStartTime(Date.now());
+        }
+    
+        if (input === typingText) {
+            setEndTime(Date.now());
+        }
+    
         let isMatch = true;
-
+    
         for (let i = 0; i < input.length; i++) {
             if (input[i] !== typingText[i]) {
                 isMatch = false;
                 break;
             }
         }
-
+    
         if (isMatch) {
             console.log('Match!');
         } else {
@@ -40,9 +52,41 @@ function TypingGame() {
         }
     }
 
+    const handleReset = () => {
+        setTypingText('');
+        setUserInput('');
+        setStartTime(null);
+        setEndTime(null);
+        setWpm(0);
+        setElapsedTime(0);
+        loadPrompt();
+        inputRef.current.focus();
+    }
+
     useEffect(() => {
         loadPrompt();
+        inputRef.current.focus();
     }, []);
+
+    useEffect(() => {
+        if (endTime !== null) {
+            const elapsedTime = (endTime - startTime) / 1000; // convert to seconds
+            const words = typingText.split(' ').length;
+            const wpm = Math.round(words / (elapsedTime / 60));
+            setWpm(wpm);
+        }
+    }, [endTime]);
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            if (startTime !== null && endTime === null) {
+                const elapsed = Math.round((Date.now() - startTime) / 1000);
+                setElapsedTime(elapsed);
+            }
+        }, 1000);
+
+        return () => clearInterval(intervalId);
+    }, [startTime, endTime]);
 
     const typedText = typingText.split('').map((char, index) => {
         let className = '';
@@ -62,11 +106,21 @@ function TypingGame() {
                 className="input-field"
                 value={userInput}
                 onChange={handleInputChange} // call handleInputChange when the input field changes
+                ref={inputRef}
             />
-            <TestArea
-                typingText={typingText}
-            />
+            {endTime !== null && (
+                <div className="stats">
+                    <div className="stat">
+                        Time: {elapsedTime} s
+                    </div>
+                    <div className="stat">
+                        WPM: {wpm}
+                    </div>
+                </div>
+            )}
+            <button onClick={handleReset}>Reset</button>
         </div>
     );
-};
+}
+
 export default TypingGame;
