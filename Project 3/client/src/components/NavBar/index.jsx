@@ -8,7 +8,7 @@ function NavBar() {
             return (
                 <ul className="flex-row">
                     <li className="mx-1">
-                        <Link to="/profile"> /* if the user is logged in, do we want them to see their profile? */
+                        <Link to="/profile"> 
                             profile 
                         </Link>
                     </li>
@@ -28,7 +28,7 @@ function NavBar() {
                         </Link>
                     </li>
                     <li className="mx-1">
-                        <Link to="/loginForm">
+                        <Link to="/login">
                             login
                         </Link>
                     </li>
