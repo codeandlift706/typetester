@@ -3,7 +3,13 @@ import TestArea from '../TestArea/TestArea';
 import './TypingGame.css';
 
 function TypingGame() {
-    const prompts = ["hello world 1", "hello world 2", "hello world 3", "hello world 4", "hello world 5"]; // replace with API call to get prompts from database
+    const prompts = [
+        'The quick brown fox jumps over the lazy dog',
+        'She sells seashells by the seashore',
+        'Peter Piper picked a peck of pickled peppers',
+        'How much wood would a woodchuck chuck',
+        'Sally sells seashells down by the seashore'
+    ]; // replace with API call to get prompts from database
 
     const [typingText, setTypingText] = useState('');
     const [userInput, setUserInput] = useState('');
