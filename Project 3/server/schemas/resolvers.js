@@ -67,6 +67,7 @@ const resolvers = {
             ('You need to be logged in!');
         },
 
+
         removeScore: async (parent, { userId, scoreId }, context) => { //GOOD
             if (context.user) {
                 const score = await Score.findOneAndDelete({
