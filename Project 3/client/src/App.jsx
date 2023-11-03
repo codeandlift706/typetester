@@ -1,4 +1,5 @@
 import TestArea from './components/TestArea/TestArea'
+import Footer from './components/Footer'
 
 function App() {
 
@@ -6,6 +7,7 @@ function App() {
     <>
       <h1>typetester</h1>
       <TestArea />
+      <Footer />
     </>
   )
 }
