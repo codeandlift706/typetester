@@ -1,28 +1,33 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { LOGIN } from '../utils/mutations';
-import Auth from '../utils/auth';
+import { LOGIN } from '../../utils/mutations';
+import Auth from '../../utils/auth';
 
 function LoginForm(props) { //do we need props?
     const [formState, setFormState] = useState({ email: '', password: '' });
-    const [login, { error }] = useMutation(LOGIN);
+    const [login, { error, data }] = useMutation(LOGIN);
+
+
+    // useEffect(() => {
+    //     if (error) {
+    //         setShowAlert(true);
+    //     } else {
+    //         setShowAlert(false);
+    //     }
+    // }, [error])
+
+
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            const mutationResponse = await login({
-                variables: {
-                    firstName: formState.firstName,
-                    lastName: formState.lastName,
-                    username: formState.username,
-                    email: formState.email,
-                    password: formState.password,
-                },
+            const { data } = await login({
+                variables: {...formState},
             });
-            const token = mutationResponse.data.login.token;
+            const token = data.login.token;
             Auth.login(token);
-        } catch (e) {
-            console.log(e);
+        } catch (err) {
+            console.error(err);
         }
     };
 
@@ -43,7 +48,6 @@ function LoginForm(props) { //do we need props?
     return (
         <div>
             {/* <Link to="/signup">← Go to Signup</Link> */}
-
             <h2>Login</h2>
             <form onSubmit={handleFormSubmit}>
                 <div>
