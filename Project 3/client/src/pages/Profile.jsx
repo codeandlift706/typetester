@@ -1,18 +1,18 @@
+import { Link } from "react-router-dom";
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
-//import { QUERY_ME } from '../utils/queries';
-import { QUERY_USER } from '../utils/queries';
-import { DELETE_USER } from '../utils/mutations';
+import { QUERY_USER, QUERY_ME } from '../utils/queries';
+// import { DELETE_USER } from '../utils/mutations';
 import { UPDATE_USER } from '../utils/mutations';
 
 const Profile = () => {
 
-  const { userId } = useParams();
+  const { username: userParam } = useParams();
 
-  const { loading, data } = useQuery(QUERY_USER, { //query for specific user
-    variables: { userId },
+  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, { //query for specific user
+    variables: { username: userParam },
   });
 
   const [userFormState, setUserFormState] = useState({ username: '' })
@@ -79,7 +79,12 @@ const Profile = () => {
     });
   };
 
-
+  // navigate to personal profile page if username is yours
+  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+    <Link to="/me">
+      profile
+    </Link>
+  }
 
   if (loading) {
     return <div>Loading...</div>;
@@ -87,7 +92,7 @@ const Profile = () => {
   return (
     <div>
       <h2>
-        Your profile. Logged in as ({userData.username})
+        Logged in as ({userData.username})
       </h2>
 
       {/* Update your username */}

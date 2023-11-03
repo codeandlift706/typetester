@@ -8,19 +8,27 @@ export const QUERY_USERS =gql `
       firstName
       lastName
       email
+      scores {
+      _id
+      score
+      }
     }
   }
 `;
 
-// Get a single user by ID
+// Get a single user by their username
 export const QUERY_USER = gql`
-  query user($id: ID!) {
-    user(_id: $id) {
+  query user($username: String!) {
+    user(username: $username) {
       _id
       username
       firstName
       lastName
       email
+      scores {
+      _id
+      score
+      }
     }
   }
 `;
@@ -36,8 +44,24 @@ export const QUERY_SCORES = gql`
         username
         firstName
         lastName
+        email
       }
     }
   }
 `;
 
+export const QUERY_ME = gql`
+  query me {
+    me {
+      _id
+      username
+      firstName
+      lastName
+      email
+      scores {
+        _id
+        score
+      }
+    }
+  }
+`;

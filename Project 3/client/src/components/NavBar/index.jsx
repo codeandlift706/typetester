@@ -8,7 +8,7 @@ function NavBar() {
             return (
                 <ul className="flex-row">
                     <li className="mx-1">
-                        <Link to="/profile"> 
+                        <Link to="/me"> 
                             profile 
                         </Link>
                     </li>

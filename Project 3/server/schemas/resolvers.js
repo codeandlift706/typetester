@@ -15,6 +15,12 @@ const resolvers = {
             const params = userId ? { userId } : {};
             return Score.find(params).sort({ createdAt: -1 }); //latest score first
         },
+        me: async (parent, args, context) => {
+            if (context.user) {
+                return User.findOne({ _id: context.user._id }).populate('scores');
+            }
+            throw AuthenticationError;
+        },
     },
 
     Mutation: {
