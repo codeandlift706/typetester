@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 // import { DELETE_USER } from '../utils/mutations';
 import { UPDATE_USER } from '../utils/mutations';
 
-const Profile = ({ user }) => {
+const Profile = () => {
 
   const { username: userParam } = useParams();
 
@@ -19,8 +19,8 @@ const Profile = ({ user }) => {
   const [updateUser, { error }] = useMutation(UPDATE_USER); //I can't have both?
   // const [deleteUser, { error }] = useMutation(DELETE_USER); //Create a custom hook for this?? create a new function where it equals this whole thing
 
-  const userData = data?.user || {}; //check if data has user property
-  console.log(userData);
+  const user = data?.me || data?.user || {}; //check if data has user property
+  console.log(user) //shows the user's info!
 
 
   // const handleDeleteUser = async (userId) => {
@@ -80,14 +80,26 @@ const Profile = ({ user }) => {
   };
 
 
+
+
+
   if (loading) {
     return <div>Loading...</div>;
   }
+
+  if (!user?.username) {
+    return (
+      <h4>
+        You need to be logged in to see this. Use the navigation links above to
+        sign up or log in!
+      </h4>
+    );
+  }
+
   return (
     <div>
-      {/* Why isn't it showing? */}
       <h2>
-        Logged in as {userData.username} 
+      Viewing {userParam ? `${user.username}'s` : 'your'} profile.
       </h2>
 
       {/* Update your username */}
@@ -104,13 +116,13 @@ const Profile = ({ user }) => {
           />
         </div>
         <div>
-          <button type="submit">Submit</button>
+          <button type="submit">Update</button>
         </div>
       </form>
 
       {/* Your scores */}
       <h2>
-        {userData.scores?.length > 0 && <Scoreboard scores={userData.scores} />}
+        {user.scores?.length > 0 && <Scoreboard scores={user.scores} />}
       </h2>
 
       {/* Button to remove user */}
