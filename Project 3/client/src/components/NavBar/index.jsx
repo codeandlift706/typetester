@@ -8,8 +8,8 @@ function NavBar() {
             return (
                 <ul className="flex-row">
                     <li className="mx-1">
-                        <Link to="/home"> /* if the user is logged in, do we want them to see their profile? */
-                            Home 
+                        <Link to="/profile"> /* if the user is logged in, do we want them to see their profile? */
+                            profile 
                         </Link>
                     </li>
                     <li className="mx-1">
