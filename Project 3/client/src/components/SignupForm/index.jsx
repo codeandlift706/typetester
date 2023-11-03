@@ -36,13 +36,13 @@ function SignupForm(props) { //do we need props?
             [name]: value,
         });
 
-        setFormState({ //reset the fields
-            firstName: '',
-            lastName: '',
-            username: '',
-            email: '',
-            password: '',
-        });
+        // setFormState({ //reset the fields
+        //     firstName: '',
+        //     lastName: '',
+        //     username: '',
+        //     email: '',
+        //     password: '',
+        // });
     };
 
 
