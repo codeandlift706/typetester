@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import  StartBox  from './components/StartBox/index.jsx';
+import StartBox from './components/StartBox';
 import {
   ApolloClient,
   InMemoryCache,
@@ -9,16 +9,15 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import TypingGame from './components/TypingGame/TypingGame'
 
+import Home from './pages/Home'
 
 function App() {
   return (
     <div className="container">
-      <TypingGame/>
-      <StartBox />
+      <Home />
+      <TypingGame />
     </div>
-
   );
-
 
 }
 export default App;
