@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import TestArea from '../TestArea/TestArea';
+import './TypingGame.css';
 
 function TypingGame() {
     const prompts = ["hello world 1", "hello world 2", "hello world 3", "hello world 4", "hello world 5"]; // replace with API call to get prompts from database
@@ -13,43 +14,48 @@ function TypingGame() {
         setTypingText(content.join('')); // join the array of characters into a string
     }
 
-const handleInputChange = (event) => {
-    const userInput = event.target.value;
-    let isMatch = true;
+    const handleInputChange = (event) => {
+        const input = event.target.value;
+        setUserInput(input);
+        let isMatch = true;
 
-    for (let i = 0; i < userInput.length; i++) {
-        if (userInput[i] !== typingText[i]) {
-            isMatch = false;
-            break;
+        for (let i = 0; i < input.length; i++) {
+            if (input[i] !== typingText[i]) {
+                isMatch = false;
+                break;
+            }
+        }
+
+        if (isMatch) {
+            console.log('Match!');
+        } else {
+            console.log('Wrong');
         }
     }
-
-    if (isMatch) {
-        console.log('Match!');
-    } else {
-        console.log('Wrong');
-    }
-
-    setUserInput(userInput);
-}
 
     useEffect(() => {
         loadPrompt();
     }, []);
 
-    const typedText = typingText.substring(0, userInput.length);
-    const remainingText = typingText.substring(userInput.length);
+    const typedText = typingText.split('').map((char, index) => {
+        let className = '';
+
+        if (index < userInput.length) {
+            className = char === userInput[index] ? 'correct' : 'incorrect';
+        }
+
+        return <span key={index} className={className}>{char}</span>;
+    });
 
     return (
         <div className="container">
-            <span>{typedText}</span>
+            <div className="typing-text">{typedText}</div>
             <input
                 type="text"
                 className="input-field"
                 value={userInput}
                 onChange={handleInputChange} // call handleInputChange when the input field changes
             />
-            <span>{remainingText}</span>
             <TestArea
                 typingText={typingText}
             />
