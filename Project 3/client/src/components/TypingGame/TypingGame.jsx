@@ -13,6 +13,7 @@ function TypingGame() {
 
     const [typingText, setTypingText] = useState('');
     const [userInput, setUserInput] = useState('');
+    const [wpm, setWpm] = useState(0);
 
     const loadPrompt = () => {
         const randomPrompt = Math.floor(Math.random() * prompts.length);
