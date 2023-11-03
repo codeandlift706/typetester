@@ -1,11 +1,11 @@
-import TestArea from './components/TestArea/TestArea'
+import TypingGame from './components/TypingGame/TypingGame'
 
 function App() {
 
   return (
     <>
       <h1>typetester</h1>
-      <TestArea />
+      <TypingGame/>
     </>
   )
 }
