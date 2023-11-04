@@ -1,3 +1,6 @@
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
+
 import { useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
@@ -97,6 +100,8 @@ const Profile = () => {
   }
 
   return (
+    <>
+    <NavBar />
     <div>
       <h2>
       Viewing {userParam ? `${user.username}'s` : 'your'} profile.
@@ -129,8 +134,9 @@ const Profile = () => {
       {/* <Button onClick={() => handleDeleteUser(user.userId)}>
         Delete Your Profile
       </Button> */}
-
     </div>
+    <Footer />
+    </>
   );
 };
 
