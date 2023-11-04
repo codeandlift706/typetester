@@ -1,10 +1,9 @@
-//scoreboard - displays list of: usernames & corresponding scores
-//QUERY_SCORES, DELETE SCORE
+//scoreboard - displays list of: usernames & corresponding scores, button next to each score to remove
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 
 import { QUERY_SCORES, QUERY_USERS } from '../../utils/queries';
-import { DELETE_SCORE } from '../../utils/mutations';
+import { REMOVE_SCORE } from '../../utils/mutations';
 
 
 //we need to pass in the user & the score ??????
@@ -17,14 +16,14 @@ const Scoreboard = () => {
 
     const { loading, data } = useQuery(QUERY_USERS);
 
-    const [deleteScore, { error }] = useMutation(DELETE_SCORE);
+    const [removeScore, { error }] = useMutation(REMOVE_SCORE);
 
     const scores = data?.scores || {}; //check if there's a data object and score property
 
-    const handleDeleteScore = async () => {
+    const handleRemoveScore = async () => {
 
         try {
-            const { data } = await deleteScore({
+            const { data } = await removeScore({
                 variables: { userId, scoreId } //remove score!!!! ????
             })
 

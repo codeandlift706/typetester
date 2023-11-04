@@ -46,10 +46,10 @@ export const UPDATE_USER = gql`
   }
 `;
 
-// Delete a user by ID
-export const DELETE_USER = gql`
-  mutation deleteUser($id: ID!) {
-    deleteUser(_id: $id) {
+// Remove a user by ID
+export const REMOVE_USER = gql`
+  mutation removeUser($id: ID!) {
+    removeUser(_id: $id) {
       _id
       username
       firstName
@@ -59,10 +59,10 @@ export const DELETE_USER = gql`
   }
 `;
 
-// Delete a score by ID
-export const DELETE_SCORE = gql`
-  mutation deleteScore($id: ID!) {
-    deleteScore(_id: $id) {
+// Remove a score by ID
+export const REMOVE_SCORE = gql`
+  mutation removeScore($id: ID!) {
+    removeScore(_id: $id) {
       _id
       score
       user {

@@ -6,7 +6,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
-// import { DELETE_USER } from '../utils/mutations';
+// import { REMOVE_USER } from '../utils/mutations';
 import { UPDATE_USER } from '../utils/mutations';
 
 const Profile = () => {
@@ -20,13 +20,13 @@ const Profile = () => {
   const [userFormState, setUserFormState] = useState({ username: '' })
 
   const [updateUser, { error }] = useMutation(UPDATE_USER); //I can't have both?
-  // const [deleteUser, { error }] = useMutation(DELETE_USER); //Create a custom hook for this?? create a new function where it equals this whole thing
+  // const [removeUser, { error }] = useMutation(REMOCE_USER); //Create a custom hook for this?? create a new function where it equals this whole thing
 
   const user = data?.me || data?.user || {}; //check if data has user property
   console.log(user) //shows the user's info!
 
   const canUpdateUsername = userParam === user.id;
-  // const handleDeleteUser = async (userId) => {
+  // const handleRemoveUser = async (userId) => {
   //   const token = Auth.loggedIn() ? Auth.getToken() : null; //check if we have these
 
   //   if (!token) {
@@ -34,7 +34,7 @@ const Profile = () => {
   //   }
 
   //   try {
-  //     const { data } = await deleteUser({
+  //     const { data } = await removeUser({
   //       variables: { userId } //remove user by its id. userId = userId
   //     })
 
@@ -135,8 +135,8 @@ const Profile = () => {
 
 
         {/* Button to remove user */}
-        {/* <Button onClick={() => handleDeleteUser(user.userId)}>
-        Delete Your Profile
+        {/* <Button onClick={() => handleRemoveUser(user.userId)}>
+        Remove Your Profile
       </Button> */}
       </div>
       <Footer />
