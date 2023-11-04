@@ -82,10 +82,6 @@ const Profile = () => {
     });
   };
 
-
-
-
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -109,8 +105,7 @@ const Profile = () => {
 
         {canUpdateUsername && (
           <>
-            {/* Update your username */}
-            <h2>Update Your Username</h2>
+            <h3>Update Your Username</h3>
 
             <form onSubmit={handleFormSubmit}>
               <div>
@@ -129,24 +124,14 @@ const Profile = () => {
             </form>
           </>
         )}
-        {/* Your scores */}
+
+        <h2>
+          Viewing {userParam ? `${user.username}'s` : 'your'} scores:
+        </h2>
+
         <h2>
           {user.scores?.length > 0 && <Scoreboard scores={user.scores} />}
         </h2>
-
-
-
-        {/* Your scores */}
-        <h2>
-          {user.scores?.length > 0 && <Scoreboard scores={user.scores} />}
-        </h2>
-
-
-
-
-
-
-
 
 
         {/* Button to remove user */}
