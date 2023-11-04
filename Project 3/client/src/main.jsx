@@ -22,7 +22,7 @@ const router = createBrowserRouter([
                 element: <Home />
             },
             {
-                path: 'profile/:username',
+                path: '/profile/:username',
                 element: <Profile />
             },
             {
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
                 element: <LoginForm />
             },
             {
-            path: '/me',
+            path: '/profile/me',
             element: <Profile />
             },
             {

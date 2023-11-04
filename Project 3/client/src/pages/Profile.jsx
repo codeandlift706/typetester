@@ -13,7 +13,7 @@ const Profile = () => {
 
   const { username: userParam } = useParams();
 
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, { //query for specific user
+  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, { //query for specific username & yourself
     variables: { username: userParam },
   });
 
@@ -25,7 +25,7 @@ const Profile = () => {
   const user = data?.me || data?.user || {}; //check if data has user property
   console.log(user) //shows the user's info!
 
-
+  const canUpdateUsername = userParam === user.id;
   // const handleDeleteUser = async (userId) => {
   //   const token = Auth.loggedIn() ? Auth.getToken() : null; //check if we have these
 
@@ -101,41 +101,60 @@ const Profile = () => {
 
   return (
     <>
-    <NavBar />
-    <div>
-      <h2>
-      Viewing {userParam ? `${user.username}'s` : 'your'} profile.
-      </h2>
+      <NavBar />
+      <div>
+        <h2>
+          Viewing {userParam ? `${user.username}'s` : 'your'} profile.
+        </h2>
 
-      {/* Update your username */}
-      <h2>Update Your Username</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            placeholder="username"
-            name="username"
-            type="username"
-            id="username"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <button type="submit">Update</button>
-        </div>
-      </form>
+        {canUpdateUsername && (
+          <>
+            {/* Update your username */}
+            <h2>Update Your Username</h2>
 
-      {/* Your scores */}
-      <h2>
-        {user.scores?.length > 0 && <Scoreboard scores={user.scores} />}
-      </h2>
+            <form onSubmit={handleFormSubmit}>
+              <div>
+                <label htmlFor="username">Username:</label>
+                <input
+                  placeholder="username"
+                  name="username"
+                  type="username"
+                  id="username"
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <button type="submit">Update</button>
+              </div>
+            </form>
+          </>
+        )}
+        {/* Your scores */}
+        <h2>
+          {user.scores?.length > 0 && <Scoreboard scores={user.scores} />}
+        </h2>
 
-      {/* Button to remove user */}
-      {/* <Button onClick={() => handleDeleteUser(user.userId)}>
+
+
+        {/* Your scores */}
+        <h2>
+          {user.scores?.length > 0 && <Scoreboard scores={user.scores} />}
+        </h2>
+
+
+
+
+
+
+
+
+
+        {/* Button to remove user */}
+        {/* <Button onClick={() => handleDeleteUser(user.userId)}>
         Delete Your Profile
       </Button> */}
-    </div>
-    <Footer />
+      </div>
+      <Footer />
     </>
   );
 };
