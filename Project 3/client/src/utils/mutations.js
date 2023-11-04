@@ -35,8 +35,8 @@ export const LOGIN = gql`
 
 // Update a user by ID
 export const UPDATE_USER = gql`
-  mutation updateUser($id: ID!, $username: String) {
-    updateUser(_id: $id, username: $username) {
+  mutation updateUser($username: String) {
+    updateUser(username: $username) {
       _id
       username
       firstName
@@ -48,8 +48,8 @@ export const UPDATE_USER = gql`
 
 // Remove a user by ID
 export const REMOVE_USER = gql`
-  mutation removeUser($id: ID!) {
-    removeUser(_id: $id) {
+  mutation removeUser($userId: ID!) {
+    removeUser(userId: $id) {
       _id
       username
       firstName
@@ -61,8 +61,8 @@ export const REMOVE_USER = gql`
 
 // Remove a score by ID
 export const REMOVE_SCORE = gql`
-  mutation removeScore($id: ID!) {
-    removeScore(_id: $id) {
+  mutation removeScore($scoreId: ID!) {
+    removeScore(scoreId: $id) {
       _id
       score
       user {

@@ -3,7 +3,7 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        users: async () => { //GOOD -- do we still need? this or query scores can be for scoreboard?
+        users: async () => { // do we still need? this or query scores can be for scoreboard?
             return User.find().populate('scores');
         },
 
@@ -48,7 +48,7 @@ const resolvers = {
             return { token, user };
         },
 
-        removeUser: async (parent, { userId }, context) => { //GOOD
+        removeUser: async (parent, { userId }, context) => { //REVIEW!!!
             if (context.user) {
                 await User.findOneAndDelete(
                     { _id: userId }
@@ -60,11 +60,12 @@ const resolvers = {
             ('You need to be logged in!');
         },
 
-        updateUser: async (parent, { userId, username }, context) => { //GOOD
+        updateUser: async (parent, { username }, context) => { //REVIEW!!!
             if (context.user) {
                 const user = await User.findOneAndUpdate(
-                    { _id: userId },
+                    // { _id: userId },
                     { username },
+                    //return the newly updated
                     { new: true });
 
                 return user;
@@ -74,7 +75,7 @@ const resolvers = {
         },
 
 
-        removeScore: async (parent, { userId, scoreId }, context) => { //GOOD
+        removeScore: async (parent, { userId, scoreId }, context) => { //REVIEW!!!
             if (context.user) {
                 const score = await Score.findOneAndDelete({
                     _id: scoreId,

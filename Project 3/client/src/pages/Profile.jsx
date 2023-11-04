@@ -45,24 +45,24 @@ const Profile = () => {
   // };
 
 
-  const handleFormSubmit = async (event) => {
+  const handleUpdateUserFormSubmit = async (event) => {
     event.preventDefault();
 
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    // const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-    if (!token) {
-      return false;
-    }
+    // if (!token) {
+    //   return false;
+    // }
 
     try {
       const { data } = await updateUser({
         variables: {
-          username: userFormState.username,
+          ...userFormState
         }
       })
 
-      const token = data.addUser.token;
-      Auth.login(token); //verify this
+      // const token = data.addUser.token;
+      // Auth.login(token); //verify this
       //upon success, update username based on userId -- in local storage?
 
     } catch (err) {
@@ -70,7 +70,7 @@ const Profile = () => {
     }
   };
 
-  const handleChange = (event) => {
+  const handleUsernameChange = (event) => {
     const { name, value } = event.target;
     setUserFormState({
       ...userFormState,
@@ -107,7 +107,7 @@ const Profile = () => {
           <>
             <h3>Update Your Username</h3>
 
-            <form onSubmit={handleFormSubmit}>
+            <form onSubmit={handleUpdateUserFormSubmit}>
               <div>
                 <label htmlFor="username">Username:</label>
                 <input
@@ -115,7 +115,7 @@ const Profile = () => {
                   name="username"
                   type="username"
                   id="username"
-                  onChange={handleChange}
+                  onChange={handleUsernameChange}
                 />
               </div>
               <div>
