@@ -1,16 +1,17 @@
 const mongoose = require('mongoose');
 
-const promptSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+
+const promptSchema = new Schema({
   text: {
     type: String,
     required: true,
   },
   author: {
     type: String,
-    required: true,
   },
 });
 
-const Quote = mongoose.model('prompt', promptSchema);
+const Prompt = mongoose.model('prompt', promptSchema);
 
-module.exports = Quote;
+module.exports = Prompt;

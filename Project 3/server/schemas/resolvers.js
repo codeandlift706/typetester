@@ -1,4 +1,4 @@
-const { User, Score } = require('../models');
+const { User, Score, Prompt } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
@@ -15,6 +15,9 @@ const resolvers = {
             const params = userId ? { userId } : {};
             return Score.find(params).sort({ createdAt: -1 }); //latest score first
         },
+        prompts: async () => {
+            return Prompt.find();
+        }
     },
 
     Mutation: {

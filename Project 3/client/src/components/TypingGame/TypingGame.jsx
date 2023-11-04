@@ -1,13 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './TypingGame.css';
+import { useQuery, gql } from '@apollo/client';
+
+const PROMPTS_QUERY = gql`
+  query GetPrompts {
+    prompts {
+      text
+    }
+  }
+`;
 
 function TypingGame() {
-    const prompts = [
-        'The quick brown fox jumps over the lazy dog',
-        'Peter Piper picked a peck of pickled peppers',
-        'How much wood would a woodchuck chuck',
-        'Sally sells seashells down by the seashore'
-    ]; // replace with API call to get prompts from database
+    const { loading, error, data } = useQuery(PROMPTS_QUERY);
+
+    const prompts = data?.prompts?.map((prompt) => prompt.text) || [];
 
     const [typingText, setTypingText] = useState('');
     const [userInput, setUserInput] = useState('');
@@ -78,14 +84,14 @@ function TypingGame() {
     }, [endTime]);
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
+        const interval = setInterval(() => {
             if (startTime !== null && endTime === null) {
                 const elapsed = Math.round((Date.now() - startTime) / 1000);
                 setElapsedTime(elapsed);
             }
         }, 1000);
 
-        return () => clearInterval(intervalId);
+        return () => clearInterval(interval);
     }, [startTime, endTime]);
 
     const typedText = typingText.split('').map((char, index) => {
