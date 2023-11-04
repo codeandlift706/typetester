@@ -19,12 +19,13 @@ const Profile = () => {
 
   const [userFormState, setUserFormState] = useState({ username: '' })
 
-  const [updateUser, { error }] = useMutation(UPDATE_USER); //I can't have both?
-  // const [removeUser, { error }] = useMutation(REMOCE_USER); //Create a custom hook for this?? create a new function where it equals this whole thing
+  const [updateUser, { error }] = useMutation(UPDATE_USER);
+  // const [removeUser, { error }] = useMutation(REMOCE_USER); //Create a custom hook for this?? create a new function where it equals this whole thing. Maybe don't need removeUser
 
-  const user = data?.me || data?.user || {}; //check if data has user property
-  console.log(user) //shows the user's info!
-
+  const user = data?.me || {}; //check if data has user property
+  console.log(user); //shows the user's info as an object
+  console.log(user.username); //shows the current username
+  
   const canUpdateUsername = userParam === user.id;
   // const handleRemoveUser = async (userId) => {
   //   const token = Auth.loggedIn() ? Auth.getToken() : null; //check if we have these
@@ -44,7 +45,16 @@ const Profile = () => {
   //   }
   // };
 
+//collect user input
+  const handleUsernameChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormState({
+      ...userFormState,
+      [name]: value
+    });
+  };
 
+//submit form
   const handleUpdateUserFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -58,9 +68,9 @@ const Profile = () => {
       const { data } = await updateUser({
         variables: {
           ...userFormState
-        }
-      })
-
+        },
+      });
+console.log(userFormState); //IT SHOWS THE TYPED IN NEW USERNAME IN THE CONSOLE LOG
       // const token = data.addUser.token;
       // Auth.login(token); //verify this
       //upon success, update username based on userId -- in local storage?
@@ -68,14 +78,6 @@ const Profile = () => {
     } catch (err) {
       console.error(err)
     }
-  };
-
-  const handleUsernameChange = (event) => {
-    const { name, value } = event.target;
-    setUserFormState({
-      ...userFormState,
-      [name]: value,
-    });
 
     setUserFormState({ //reset the fields
       username: '',
