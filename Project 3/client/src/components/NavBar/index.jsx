@@ -2,13 +2,14 @@ import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
 
 function NavBar() {
+    const isHomepage = window.location.pathname === "/";
 
     function showNavigation() {
         if (Auth.loggedIn()) {
             return (
                 <ul className="flex-row">
                     <li className="mx-1">
-                        <Link to="/profile"> 
+                        <Link to="/me"> 
                             profile 
                         </Link>
                     </li>
@@ -17,6 +18,7 @@ function NavBar() {
                             logout
                         </a>
                     </li>
+                    {!isHomepage && <li className="mx-1"><Link to="/">Homepage</Link></li>}
                 </ul>
             );
         } else {

@@ -1,9 +1,14 @@
+import NavBar from "../components/NavBar";
 import Scoreboard from '../components/Scoreboard';
-
+import Footer from "../components/Footer";
 
 const Score = () => {
   return (
-<Scoreboard />
+    <>
+      <NavBar />
+      <Scoreboard />
+      <Footer />
+    </>
   );
 };
 
