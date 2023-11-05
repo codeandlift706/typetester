@@ -25,10 +25,10 @@ const Profile = () => {
   const user = data?.me || {}; //check if data has user property
   console.log(user); //shows the user's info as an object
   console.log(user.username); //shows the current username
-  
+
   const canUpdateUsername = userParam === user.id; //shows on profile page if you can update username
 
-  
+
   // const handleRemoveUser = async (userId) => {
   //   const token = Auth.loggedIn() ? Auth.getToken() : null; //check if we have these
 
@@ -47,7 +47,7 @@ const Profile = () => {
   //   }
   // };
 
-//collect user input
+  //collect user input
   const handleUsernameChange = (event) => {
     const { name, value } = event.target;
     setUserFormState({
@@ -56,7 +56,7 @@ const Profile = () => {
     });
   };
 
-//submit form
+  //submit form
   const handleUpdateUserFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -72,17 +72,37 @@ const Profile = () => {
           ...userFormState //pass in updated username
         },
       });
+      console.log(data); //shows the user with updated username
 
+      if (data) {
+        // Username update was successful, display an alert
+        alert('Username updated successfully!');
+      } else {
+        alert('Username update failed. Please try again.');
+      }
+
+      return data;
+      
       // Variable to hold our updated user object
-      const updatedUser = {
-        ...user, //user object with all info (email, firstName, lastName, username, scores)
-        ...userFormState, //new username to overwrite previous username
-      };
+      // const updatedUser = {
+      //   ...data
+      //   // ...user, //user object with all info (email, firstName, lastName, username, scores)
+      //   // ...userFormState, //new username to overwrite previous username
+      // };
 
-      console.log(userFormState); //confirms the updated user info
-      return {
-        user: updatedUser, //return the updated user
-      };
+      // if (updatedUser) {
+      //   // Username update was successful, display an alert
+      //   alert('Username updated successfully!');
+      // } else {
+      //   alert('Username update failed. Please try again.');
+      // }
+
+      // console.log(updatedUser);
+      // console.log(userFormState); //returns updated username
+      // return {
+      //   user: updatedUser, //return the updated user
+      // };
+
 
     } catch (err) {
       console.error(err)
