@@ -108,7 +108,7 @@ const Profile = () => {
       console.error(err)
     }
 
-    setUserFormState({ //reset the fields
+    setUserFormState({
       username: '',
     });
   };
@@ -163,7 +163,7 @@ const Profile = () => {
           )}
 
           <button onClick={() => setShowUsernameUpdateForm(!showUsernameUpdateForm)}>
-            User Settings
+            {showUsernameUpdateForm ? 'Close User Settings' : 'User Settings'}
           </button>
 
           <h2>

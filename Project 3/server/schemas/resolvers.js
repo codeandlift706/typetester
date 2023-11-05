@@ -7,7 +7,7 @@ const resolvers = {
             return User.find().populate('scores');
         },
 
-        user: async (parent, { username }) => { //GOOD
+        user: async (parent, { username }) => { 
             return User.findOne({ username }).populate('scores');
         },
 
@@ -27,13 +27,13 @@ const resolvers = {
     },
 
     Mutation: {
-        addUser: async (parent, { firstName, lastName, username, email, password }) => { //GOOD
+        addUser: async (parent, { firstName, lastName, username, email, password }) => {
             const user = await User.create({ firstName, lastName, username, email, password });
             const token = signToken(user);
             return { token, user };
         },
 
-        login: async (parent, { email, password }) => { //GOOD
+        login: async (parent, { email, password }) => { 
             const user = await User.findOne({ email });
 
             if (!user) {
@@ -63,7 +63,7 @@ const resolvers = {
             ('You need to be logged in!');
         },
 
-        updateUser: async (parent, { username }, context) => { //GOOD
+        updateUser: async (parent, { username }, context) => { 
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
