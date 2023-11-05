@@ -18,15 +18,18 @@ const Profile = () => {
   });
 
   const [userFormState, setUserFormState] = useState({ username: '' })
+  const [showUsernameUpdateForm, setShowUsernameUpdateForm] = useState(false); //show "User Settings" button
+
 
   const [updateUser, { error }] = useMutation(UPDATE_USER);
   // const [removeUser, { error }] = useMutation(REMOCE_USER); //Create a custom hook for this?? create a new function where it equals this whole thing. Maybe don't need removeUser
 
   const user = data?.me || {}; //check if data has user property
-  console.log(user); //shows the user's info as an object
-  console.log(user.username); //shows the current username
-  
-  const canUpdateUsername = userParam === user.id;
+  // console.log(user); //shows the user's info as an object
+  // console.log(user.username); //shows the current username
+  const canUpdateUsername = userParam === user.id; //shows on profile page if you can update username
+
+
   // const handleRemoveUser = async (userId) => {
   //   const token = Auth.loggedIn() ? Auth.getToken() : null; //check if we have these
 
@@ -45,7 +48,7 @@ const Profile = () => {
   //   }
   // };
 
-//collect user input
+  //collect user input
   const handleUsernameChange = (event) => {
     const { name, value } = event.target;
     setUserFormState({
@@ -54,32 +57,64 @@ const Profile = () => {
     });
   };
 
-//submit form
+  //submit form
   const handleUpdateUserFormSubmit = async (event) => {
     event.preventDefault();
 
-    // const token = Auth.loggedIn() ? Auth.getToken() : null;
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-    // if (!token) {
-    //   return false;
-    // }
+    if (!token) {
+      return false;
+    }
+
+    const confirmation = window.confirm('Are you sure you want to update your username?');
+
+    if (!confirmation) {
+      return false; // Cancel the form submission
+    }
 
     try {
       const { data } = await updateUser({
         variables: {
-          ...userFormState
+          ...userFormState //pass in updated username
         },
       });
-console.log(userFormState); //IT SHOWS THE TYPED IN NEW USERNAME IN THE CONSOLE LOG
-      // const token = data.addUser.token;
-      // Auth.login(token); //verify this
-      //upon success, update username based on userId -- in local storage?
+      console.log(data); //shows the user with updated username
+
+      if (data) {
+        // Username update was successful, display an alert
+        alert('Username updated successfully!');
+      } else {
+        alert('Username update failed. Please try again.');
+      }
+
+      return data;
+
+      // Variable to hold our updated user object
+      // const updatedUser = {
+      //   ...data
+      //   // ...user, //user object with all info (email, firstName, lastName, username, scores)
+      //   // ...userFormState, //new username to overwrite previous username
+      // };
+
+      // if (updatedUser) {
+      //   // Username update was successful, display an alert
+      //   alert('Username updated successfully!');
+      // } else {
+      //   alert('Username update failed. Please try again.');
+      // }
+
+      // console.log(updatedUser);
+      // console.log(userFormState); //returns updated username
+      // return {
+      //   user: updatedUser, //return the updated user
+      // };
 
     } catch (err) {
       console.error(err)
     }
 
-    setUserFormState({ //reset the fields
+    setUserFormState({
       username: '',
     });
   };
@@ -101,45 +136,51 @@ console.log(userFormState); //IT SHOWS THE TYPED IN NEW USERNAME IN THE CONSOLE 
     <>
       <NavBar />
       <div>
-        <h2>
-          Viewing {userParam ? `${user.username}'s` : 'your'} profile.
-        </h2>
+        <p>
+          Logged in as: {user.username}
+        </p>
 
-        {canUpdateUsername && (
-          <>
-            <h3>Update Your Username</h3>
+        <div className="user-settings-container">
+          <h2>
+            Welcome to {userParam ? `${user.username}'s` : 'your'} profile!
+          </h2>
 
-            <form onSubmit={handleUpdateUserFormSubmit}>
-              <div>
-                <label htmlFor="username">Username:</label>
-                <input
-                  placeholder="username"
-                  name="username"
-                  type="username"
-                  id="username"
-                  onChange={handleUsernameChange}
-                />
-              </div>
-              <div>
-                <button type="submit">Update</button>
-              </div>
-            </form>
-          </>
-        )}
+          {showUsernameUpdateForm && (
+            <>
+              <h3>Update Your Username</h3>
+              <form onSubmit={handleUpdateUserFormSubmit}>
+                <div>
 
-        <h2>
-          Viewing {userParam ? `${user.username}'s` : 'your'} scores:
-        </h2>
+                  <label
+                    htmlFor="username">Username:</label>
+                  <input
+                    placeholder="username"
+                    name="username"
+                    type="username"
+                    id="username"
+                    onChange={handleUsernameChange}
+                  />
+                </div>
+                <div>
+                  <button type="submit">Update</button>
+                </div>
+              </form>
+            </>
+          )}
 
-        <h2>
-          {user.scores?.length > 0 && <Scoreboard scores={user.scores} />}
-        </h2>
+          <button onClick={() => setShowUsernameUpdateForm(!showUsernameUpdateForm)}>
+            {showUsernameUpdateForm ? 'Close User Settings' : 'User Settings'}
+          </button>
 
+          <h2>
+            {user.scores?.length > 0 && <Scoreboard scores={user.scores} />}
+          </h2>
 
-        {/* Button to remove user */}
-        {/* <Button onClick={() => handleRemoveUser(user.userId)}>
-        Remove Your Profile
-      </Button> */}
+          {/* Button to remove user */}
+          {/* <Button onClick={() => handleRemoveUser(user.userId)}>
+          Remove Your Profile
+        </Button> */}
+        </div>
       </div>
       <Footer />
     </>

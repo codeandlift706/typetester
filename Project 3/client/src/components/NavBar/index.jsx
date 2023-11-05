@@ -10,12 +10,12 @@ function NavBar() {
                 <ul className="flex-row">
                     <li className="mx-1">
                         <Link to="/profile/me"> 
-                            profile 
+                            Profile 
                         </Link>
                     </li>
                     <li className="mx-1">
                         <a href="/" onClick={() => Auth.logout()}>
-                            logout
+                            Logout
                         </a>
                     </li>
                     {!isHomepage && <li className="mx-1"><Link to="/">Homepage</Link></li>}
@@ -44,7 +44,7 @@ function NavBar() {
         <header className="account-buttons flex-row mx-1">
             <li>
                 <Link to="/score">
-                    scoreboard
+                    Scoreboard
                 </Link>
             </li>
 

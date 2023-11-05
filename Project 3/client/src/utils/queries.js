@@ -58,7 +58,6 @@ export const QUERY_PROMPTS = gql`
     }
   }
 `; 
-
 export const QUERY_ME = gql`
   query me {
     me {
