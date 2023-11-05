@@ -1,19 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import './TypingGame.css';
-import { useQuery, gql } from '@apollo/client';
-
-const PROMPTS_QUERY = gql`
-  query GetPrompts {
-    prompts {
-      text
-    }
-  }
-`;
+import { useQuery } from '@apollo/client';
+import { QUERY_PROMPTS } from '../../utils/queries';
+import { LoadingContext } from '../TypingGame/LoadingContext';
 
 function TypingGame() {
-    const { loading, error, data } = useQuery(PROMPTS_QUERY);
-
-    const prompts = data?.prompts?.map((prompt) => prompt.text) || [];
+    const { loading } = useContext(LoadingContext);
+    const { data } = useQuery(QUERY_PROMPTS);
+    const prompts = data?.prompts?.map(prompt => prompt.text) || [];
 
     const [typingText, setTypingText] = useState('');
     const [userInput, setUserInput] = useState('');
@@ -70,9 +64,11 @@ function TypingGame() {
     }
 
     useEffect(() => {
-        loadPrompt();
-        inputRef.current.focus();
-    }, []);
+        if (data) {
+            loadPrompt();
+            inputRef.current.focus();
+        }
+    }, [data]);
 
     useEffect(() => {
         if (endTime !== null) {
@@ -103,6 +99,10 @@ function TypingGame() {
 
         return <span key={index} className={className}>{char}</span>;
     });
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="container">
