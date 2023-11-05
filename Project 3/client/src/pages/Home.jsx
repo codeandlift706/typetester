@@ -1,12 +1,13 @@
 import NavBar from "../components/NavBar";
 import TypingGame from '../components/TypingGame/TypingGame'
+import Footer from "../components/Footer";
 
 
 const Home = () => {
   return (
-    <div className="container">
+    <div className="home-container">
       <NavBar />
-      <TypingGame />
+      <Footer />
     </div>
   );
 };
