@@ -21,11 +21,20 @@ const typeDefs = `
         createdAt: String
     }
 
+    type Prompt{
+        _id: ID
+        text: String
+    }
+
     type Query { 
         users: [User]
         user(username: String!): User
         scores: [Score]
+<<<<<<< HEAD
+        prompts: [Prompt]
+=======
         me: User
+>>>>>>> b5c109e00dd66848864acb99dc6d3d09363657e7
     }
 
     type Mutation {

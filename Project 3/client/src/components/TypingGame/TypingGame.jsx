@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import './TypingGame.css';
+import { useQuery } from '@apollo/client';
+import { QUERY_PROMPTS } from '../../utils/queries';
+import { LoadingContext } from '../TypingGame/LoadingContext';
 
 function TypingGame() {
-    const prompts = [
-        'The quick brown fox jumps over the lazy dog',
-        'Peter Piper picked a peck of pickled peppers',
-        'How much wood would a woodchuck chuck',
-        'Sally sells seashells down by the seashore'
-    ]; // replace with API call to get prompts from database
+    const { loading } = useContext(LoadingContext);
+    const { data } = useQuery(QUERY_PROMPTS);
+    const prompts = data?.prompts?.map(prompt => prompt.text) || [];
 
     const [typingText, setTypingText] = useState('');
     const [userInput, setUserInput] = useState('');
@@ -64,9 +64,11 @@ function TypingGame() {
     }
 
     useEffect(() => {
-        loadPrompt();
-        inputRef.current.focus();
-    }, []);
+        if (data) {
+            loadPrompt();
+            inputRef.current.focus();
+        }
+    }, [data]);
 
     useEffect(() => {
         if (endTime !== null) {
@@ -78,14 +80,14 @@ function TypingGame() {
     }, [endTime]);
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
+        const interval = setInterval(() => {
             if (startTime !== null && endTime === null) {
                 const elapsed = Math.round((Date.now() - startTime) / 1000);
                 setElapsedTime(elapsed);
             }
         }, 1000);
 
-        return () => clearInterval(intervalId);
+        return () => clearInterval(interval);
     }, [startTime, endTime]);
 
     const typedText = typingText.split('').map((char, index) => {
@@ -97,6 +99,10 @@ function TypingGame() {
 
         return <span key={index} className={className}>{char}</span>;
     });
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="container">

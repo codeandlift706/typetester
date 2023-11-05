@@ -1,4 +1,4 @@
-const { User, Score } = require('../models');
+const { User, Score, Prompt } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
@@ -15,12 +15,18 @@ const resolvers = {
             const params = userId ? { userId } : {};
             return Score.find(params).sort({ createdAt: -1 }); //latest score first
         },
+<<<<<<< HEAD
+        prompts: async () => {
+            return Prompt.find();
+        }
+=======
         me: async (parent, args, context) => {
             if (context.user) {
                 return User.findOne({ _id: context.user._id }).populate('scores');
             }
             throw AuthenticationError;
         },
+>>>>>>> b5c109e00dd66848864acb99dc6d3d09363657e7
     },
 
     Mutation: {
