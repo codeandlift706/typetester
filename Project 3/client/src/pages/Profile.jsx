@@ -82,7 +82,7 @@ const Profile = () => {
       }
 
       return data;
-      
+
       // Variable to hold our updated user object
       // const updatedUser = {
       //   ...data
@@ -130,8 +130,11 @@ const Profile = () => {
     <>
       <NavBar />
       <div>
+        <p>
+          Logged in as: {user.username}
+        </p>
         <h2>
-          Viewing {userParam ? `${user.username}'s` : 'your'} profile.
+          Welcome to {userParam ? `${user.username}'s` : 'your'} profile!
         </h2>
 
         {canUpdateUsername && (
