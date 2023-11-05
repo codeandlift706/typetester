@@ -67,6 +67,12 @@ const Profile = () => {
       return false;
     }
 
+    const confirmation = window.confirm('Are you sure you want to update your username?');
+
+    if (!confirmation) {
+      return false; // Cancel the form submission
+    }
+
     try {
       const { data } = await updateUser({
         variables: {
