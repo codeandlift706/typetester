@@ -60,20 +60,19 @@ const resolvers = {
             ('You need to be logged in!');
         },
 
-        updateUser: async (parent, { username }) => { //REVIEW!!!
-            // if (context.user) {
-                const user = await User.findOneAndUpdate(
-                    // { _id: userId },
-                    { username },
-                    {username: username },
+        updateUser: async (parent, username, context) => { //REVIEW!!!
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $set: { username } },
                     //return the newly updated
-                    { new: true });
+                    { new: true }
+                    );
 
-                    console.log(username);
-                return user;
-            // }
-            // throw AuthenticationError;
-            // ('You need to be logged in!');
+                return updatedUser;
+            }
+            throw AuthenticationError;
+            ('You need to be logged in!');
         },
 
 

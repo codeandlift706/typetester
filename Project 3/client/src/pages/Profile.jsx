@@ -58,11 +58,11 @@ const Profile = () => {
   const handleUpdateUserFormSubmit = async (event) => {
     event.preventDefault();
 
-    // const token = Auth.loggedIn() ? Auth.getToken() : null;
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-    // if (!token) {
-    //   return false;
-    // }
+    if (!token) {
+      return false;
+    }
 
     try {
       const { data } = await updateUser({
@@ -70,8 +70,9 @@ const Profile = () => {
           ...userFormState
         },
       });
-console.log(userFormState); //IT SHOWS THE TYPED IN NEW USERNAME IN THE CONSOLE LOG
-      // const token = data.addUser.token;
+console.log(JSON.stringify(userFormState)); //IT SHOWS THE TYPED IN NEW USERNAME IN THE CONSOLE LOG
+
+      // const token = data.updateUser.token;
       // Auth.login(token); //verify this
       //upon success, update username based on userId -- in local storage?
 
