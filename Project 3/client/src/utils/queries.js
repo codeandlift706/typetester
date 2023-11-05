@@ -50,6 +50,14 @@ export const QUERY_SCORES = gql`
   }
 `;
 
+export const QUERY_PROMPTS = gql`
+  query {
+    prompts {
+      _id
+      text
+    }
+  }
+`; 
 export const QUERY_ME = gql`
   query me {
     me {

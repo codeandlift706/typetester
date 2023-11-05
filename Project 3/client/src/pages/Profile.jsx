@@ -26,7 +26,9 @@ const Profile = () => {
   console.log(user); //shows the user's info as an object
   console.log(user.username); //shows the current username
   
-  const canUpdateUsername = userParam === user.id;
+  const canUpdateUsername = userParam === user.id; //shows on profile page if you can update username
+
+  
   // const handleRemoveUser = async (userId) => {
   //   const token = Auth.loggedIn() ? Auth.getToken() : null; //check if we have these
 
@@ -67,14 +69,20 @@ const Profile = () => {
     try {
       const { data } = await updateUser({
         variables: {
-          ...userFormState
+          ...userFormState //pass in updated username
         },
       });
-console.log(JSON.stringify(userFormState)); //IT SHOWS THE TYPED IN NEW USERNAME IN THE CONSOLE LOG
 
-      // const token = data.updateUser.token;
-      // Auth.login(token); //verify this
-      //upon success, update username based on userId -- in local storage?
+      // Variable to hold our updated user object
+      const updatedUser = {
+        ...user, //user object with all info (email, firstName, lastName, username, scores)
+        ...userFormState, //new username to overwrite previous username
+      };
+
+      console.log(userFormState); //confirms the updated user info
+      return {
+        user: updatedUser, //return the updated user
+      };
 
     } catch (err) {
       console.error(err)

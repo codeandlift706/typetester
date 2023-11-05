@@ -1,4 +1,4 @@
-const { User, Score } = require('../models');
+const { User, Score, Prompt } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
@@ -14,6 +14,9 @@ const resolvers = {
         scores: async (parent, { userId }) => { //REVIEW!!!
             const params = userId ? { userId } : {};
             return Score.find(params).sort({ createdAt: -1 }); //latest score first
+        },
+        prompts: async () => {
+            return Prompt.find();
         },
         me: async (parent, args, context) => {
             if (context.user) {
@@ -60,7 +63,7 @@ const resolvers = {
             ('You need to be logged in!');
         },
 
-        updateUser: async (parent, username, context) => { //REVIEW!!!
+        updateUser: async (parent, { username }, context) => { //GOOD
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
