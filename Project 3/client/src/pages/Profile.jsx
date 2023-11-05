@@ -18,14 +18,15 @@ const Profile = () => {
   });
 
   const [userFormState, setUserFormState] = useState({ username: '' })
+  const [showUsernameUpdateForm, setShowUsernameUpdateForm] = useState(false); //show "User Settings" button
+
 
   const [updateUser, { error }] = useMutation(UPDATE_USER);
   // const [removeUser, { error }] = useMutation(REMOCE_USER); //Create a custom hook for this?? create a new function where it equals this whole thing. Maybe don't need removeUser
 
   const user = data?.me || {}; //check if data has user property
-  console.log(user); //shows the user's info as an object
-  console.log(user.username); //shows the current username
-
+  // console.log(user); //shows the user's info as an object
+  // console.log(user.username); //shows the current username
   const canUpdateUsername = userParam === user.id; //shows on profile page if you can update username
 
 
@@ -103,7 +104,6 @@ const Profile = () => {
       //   user: updatedUser, //return the updated user
       // };
 
-
     } catch (err) {
       console.error(err)
     }
@@ -133,45 +133,48 @@ const Profile = () => {
         <p>
           Logged in as: {user.username}
         </p>
-        <h2>
-          Welcome to {userParam ? `${user.username}'s` : 'your'} profile!
-        </h2>
 
-        {canUpdateUsername && (
-          <>
-            <h3>Update Your Username</h3>
+        <div className="user-settings-container">
+          <h2>
+            Welcome to {userParam ? `${user.username}'s` : 'your'} profile!
+          </h2>
 
-            <form onSubmit={handleUpdateUserFormSubmit}>
-              <div>
-                <label htmlFor="username">Username:</label>
-                <input
-                  placeholder="username"
-                  name="username"
-                  type="username"
-                  id="username"
-                  onChange={handleUsernameChange}
-                />
-              </div>
-              <div>
-                <button type="submit">Update</button>
-              </div>
-            </form>
-          </>
-        )}
+          {showUsernameUpdateForm && (
+            <>
+              <h3>Update Your Username</h3>
+              <form onSubmit={handleUpdateUserFormSubmit}>
+                <div>
 
-        <h2>
-          Viewing {userParam ? `${user.username}'s` : 'your'} scores:
-        </h2>
+                  <label
+                    htmlFor="username">Username:</label>
+                  <input
+                    placeholder="username"
+                    name="username"
+                    type="username"
+                    id="username"
+                    onChange={handleUsernameChange}
+                  />
+                </div>
+                <div>
+                  <button type="submit">Update</button>
+                </div>
+              </form>
+            </>
+          )}
 
-        <h2>
-          {user.scores?.length > 0 && <Scoreboard scores={user.scores} />}
-        </h2>
+          <button onClick={() => setShowUsernameUpdateForm(!showUsernameUpdateForm)}>
+            User Settings
+          </button>
 
+          <h2>
+            {user.scores?.length > 0 && <Scoreboard scores={user.scores} />}
+          </h2>
 
-        {/* Button to remove user */}
-        {/* <Button onClick={() => handleRemoveUser(user.userId)}>
-        Remove Your Profile
-      </Button> */}
+          {/* Button to remove user */}
+          {/* <Button onClick={() => handleRemoveUser(user.userId)}>
+          Remove Your Profile
+        </Button> */}
+        </div>
       </div>
       <Footer />
     </>
