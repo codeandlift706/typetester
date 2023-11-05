@@ -1,5 +1,5 @@
 const User = require('./User');
 const Score = require('./Score');
-const Quote = require('./Prompt');
+const Prompt = require('./Prompt');
 
-module.exports = { User, Score, Quote };
+module.exports = { User, Score, Prompt };
