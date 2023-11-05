@@ -1,7 +1,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './App';
 import Error from './pages/Error';
@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import Score from './pages/Score';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
+import './index.css'
 
 const router = createBrowserRouter([
     {
@@ -27,20 +28,20 @@ const router = createBrowserRouter([
             },
             {
                 path: '/score',
-                element: <Score/>
+                element: <Score />
             },
             {
                 path: '/login',
                 element: <LoginForm />
             },
             {
-            path: '/profile/me',
-            element: <Profile />
+                path: '/profile/me',
+                element: <Profile />
             },
             {
                 path: '/signup',
                 element: <SignupForm />
-            }
+            },
         ]
     }
 ]);

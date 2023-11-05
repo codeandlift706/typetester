@@ -23,29 +23,30 @@ function NavBar() {
             );
         } else {
             return (
-                <ul className="flex-row">
-                    <li className="mx-1">
-                        <Link to="/signup">
-                            Signup
-                        </Link>
-                    </li>
+                <div className="account-buttons flex-row">
+                    
                     <li className="mx-1">
                         <Link to="/login">
-                            Login
+                            login
                         </Link>
                     </li>
-                </ul>
+                    <li className="mx-1">
+                        <Link to="/signup">
+                            signup
+                        </Link>
+                    </li>
+                </div>
             );
         }
     }
 
     return (
-        <header className="flex-row px-1">
-            <h1>
+        <header className="account-buttons flex-row mx-1">
+            <li>
                 <Link to="/score">
                     Scoreboard
                 </Link>
-            </h1>
+            </li>
 
             <nav>
                 {showNavigation()}
