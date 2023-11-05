@@ -1,5 +1,6 @@
 import NavBar from "../components/NavBar";
 import TypingGame from '../components/TypingGame/TypingGame'
+import Footer from "../components/Footer";
 
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
     <div className="container">
       <NavBar />
       <TypingGame />
+      <Footer />
     </div>
   );
 };

@@ -1,6 +1,4 @@
-const mongoose = require('mongoose');
-
-const { Schema } = mongoose;
+const { Schema, model } = require('mongoose');
 
 const scoreSchema = new Schema({
     score: {
@@ -18,6 +16,6 @@ const scoreSchema = new Schema({
     }
 });
 
-const Score = mongoose.model('Score', scoreSchema);
+const Score = model('Score', scoreSchema);
 
 module.exports = Score;

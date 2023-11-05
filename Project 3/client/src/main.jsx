@@ -22,16 +22,20 @@ const router = createBrowserRouter([
                 element: <Home />
             },
             {
-                path: 'profile/:id',
+                path: '/profile/:username',
                 element: <Profile />
             },
             {
-                path: 'score',
+                path: '/score',
                 element: <Score/>
             },
             {
                 path: '/login',
                 element: <LoginForm />
+            },
+            {
+            path: '/profile/me',
+            element: <Profile />
             },
             {
                 path: '/signup',
