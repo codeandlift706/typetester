@@ -50,7 +50,6 @@ export const QUERY_SCORES = gql`
   }
 `;
 
-<<<<<<< HEAD
 export const QUERY_PROMPTS = gql`
   query {
     prompts {
@@ -59,20 +58,3 @@ export const QUERY_PROMPTS = gql`
     }
   }
 `; 
-=======
-export const QUERY_ME = gql`
-  query me {
-    me {
-      _id
-      username
-      firstName
-      lastName
-      email
-      scores {
-        _id
-        score
-      }
-    }
-  }
-`;
->>>>>>> b5c109e00dd66848864acb99dc6d3d09363657e7
