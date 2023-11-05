@@ -82,6 +82,7 @@ h2 {
   position: absolute;
   align-items: center;
   flex-direction: column;
+  justify-content: center;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -89,6 +90,7 @@ h2 {
   height: 300px;
   box-shadow: 0px 0px 8px rgb(158, 158, 158);
   background-color: var(--container-color);
+  border-radius: 5px;
  
 }
 
@@ -98,6 +100,7 @@ li {
 
 #title {
   color: black;
+  font-size: 30px;
   padding-top: 20px;
 }
 
@@ -115,4 +118,12 @@ li {
 .typing-text {
   flex: 1;
   margin-right: 10px;
+}
+
+.coffee-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* this shit doesn't work */
 }

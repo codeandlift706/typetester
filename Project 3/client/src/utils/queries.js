@@ -58,3 +58,19 @@ export const QUERY_PROMPTS = gql`
     }
   }
 `; 
+
+export const QUERY_ME = gql`
+  query me {
+    me {
+      _id
+      username
+      firstName
+      lastName
+      email
+      scores {
+        _id
+        score
+      }
+    }
+  }
+`;
