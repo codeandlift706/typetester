@@ -2,9 +2,9 @@ import React from 'react';
 
 function Header() {
     return (
-        <p class="title">
+        <li className="title">
             typetester
-        </p>
+        </li>
     );
 }
 
