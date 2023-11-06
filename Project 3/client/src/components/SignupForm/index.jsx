@@ -53,7 +53,7 @@ function SignupForm(props) { //do we need props?
             <p className="title">signup</p>
             <form onSubmit={handleFormSubmit}>
                 <div>
-                    <label htmlFor="firstName">First Name</label>
+                    <label class="login-labels" htmlFor="firstName"><b>first name</b></label>
                     <div>
                     <input
                         placeholder="first"
@@ -65,7 +65,7 @@ function SignupForm(props) { //do we need props?
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="lastName">Last Name</label>
+                    <label class="login-labels" htmlFor="lastName"><b>last name</b></label>
                     <div>
                     <input
                         placeholder="last"
@@ -77,7 +77,7 @@ function SignupForm(props) { //do we need props?
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="username">Username</label>
+                    <label class="login-labels" htmlFor="username"><b>username</b></label>
                     <div>
                     <input
                         placeholder="username"
@@ -89,7 +89,7 @@ function SignupForm(props) { //do we need props?
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="email">Email</label>
+                    <label class="login-labels" htmlFor="email"><b>email</b></label>
                     <div>
                     <input
                         placeholder="youremail@test.com"
@@ -101,7 +101,7 @@ function SignupForm(props) { //do we need props?
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="pwd">Password</label>
+                    <label class="login-labels" htmlFor="pwd"><b>password</b></label>
                     <div>
                     <input
                         placeholder="******"

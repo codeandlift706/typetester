@@ -129,11 +129,15 @@ li {
   background-color: var(--container-color);
   border-radius: 5px;
   color: black;
+  animation: enlarge 1s forwards;
 }
 
 .typing-text {
   flex: 1;
-  margin-right: 10px;
+  font-size: 20px;
+  margin-right: 40px;
+  margin-left: 40px;
+  margin-top: 80px;
 }
 
 .coffee-button {
@@ -141,7 +145,6 @@ li {
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* this shit doesn't work */
 }
 
 .begin-button {
@@ -152,9 +155,17 @@ li {
 .submit-button {
   background-color: var(--background-color);
   color: black;
+}
+
+.reset-button {
+  background-color: var(--background-color);
+  color: black;
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  
 }
 
 .login-container {
@@ -191,6 +202,26 @@ li {
   }
 }
 
+@keyframes enlarge {
+  from {
+    width: 500px;
+    height: 300px;
+  }
+  to {
+    width: 700px;
+    height: 400px;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .header {
   display: flex;
   align-items:center;
@@ -202,5 +233,12 @@ li {
 .input-field {
   width: 600px;
   height: 80px;
-  
+  resize: none;
+  padding: 10px;
+  word-wrap: break-word;
+  position: relative;
+}
+
+.hidden-div {
+  animation: fade 2s forwards;
 }

@@ -9,17 +9,14 @@ function BeginButton() {
     const handleButtonClick = (event) => {
     };
 
-    if (Auth.loggedIn()) {
-        return (
-            <div>
-                <Link to="/play">
-                    <button class="begin-button" onClick={handleButtonClick}>begin</button>
-                </Link>
-            </div>
-        );
-    } else {
-        return;
-    }
+
+    return (
+        <div>
+            <Link to="/play">
+                <button class="begin-button" onClick={handleButtonClick}>begin</button>
+            </Link>
+        </div>
+    );
 }
 
 export default BeginButton;
