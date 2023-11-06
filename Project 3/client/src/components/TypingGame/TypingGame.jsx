@@ -15,7 +15,8 @@ function TypingGame() {
     const [endTime, setEndTime] = useState(null);
     const [wpm, setWpm] = useState(0);
     const [elapsedTime, setElapsedTime] = useState(0);
-
+    const [accuracy, setAccuracy] = useState(null);
+    const [numIncorrect, setNumIncorrect] = useState(0);
     const inputRef = useRef(null);
 
     const loadPrompt = () => {
@@ -27,28 +28,37 @@ function TypingGame() {
     const handleInputChange = (event) => {
         const input = event.target.value;
         setUserInput(input);
-    
+
         if (startTime === null) {
             setStartTime(Date.now());
         }
-    
+
         if (input === typingText) {
             setEndTime(Date.now());
         }
-    
+
         let isMatch = true;
-    
+
         for (let i = 0; i < input.length; i++) {
             if (input[i] !== typingText[i]) {
                 isMatch = false;
                 break;
             }
         }
-    
+
         if (isMatch) {
             console.log('Match!');
         } else {
             console.log('Wrong');
+        }
+        const value = event.target.value;
+        const lastChar = value[value.length - 1];
+        const lastPromptChar = typingText[userInput.length];
+    
+        if (lastChar === lastPromptChar) {
+          setUserInput(value);
+        } else {
+          setNumIncorrect(numIncorrect + 1);
         }
     }
 
@@ -59,6 +69,8 @@ function TypingGame() {
         setEndTime(null);
         setWpm(0);
         setElapsedTime(0);
+        setAccuracy(null);
+        setNumIncorrect(0);
         loadPrompt();
         inputRef.current.focus();
     }
@@ -76,6 +88,9 @@ function TypingGame() {
             const words = typingText.split(' ').length;
             const wpm = Math.round(words / (elapsedTime / 60));
             setWpm(wpm);
+            const numCorrect = typingText.length - numIncorrect;
+            const accuracy = Math.round((numCorrect / typingText.length) * 100);
+            setAccuracy(accuracy);
         }
     }, [endTime]);
 
@@ -105,7 +120,7 @@ function TypingGame() {
     }
 
     return (
-        <div className="container">
+        <div className="container TypingGame">
             <div className="typing-text">{typedText}</div>
             <input
                 type="text"
@@ -121,6 +136,9 @@ function TypingGame() {
                     </div>
                     <div className="stat">
                         WPM: {wpm}
+                    </div>
+                    <div className="stat">
+                        Accuracy: {accuracy}%
                     </div>
                 </div>
             )}
