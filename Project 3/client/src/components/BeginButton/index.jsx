@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 import TypingGame from '../TypingGame/TypingGame';
+import { Link } from "react-router-dom";
+import Auth from "../../utils/auth";
+
 
 function BeginButton() {
-    
-    const [TypingGame, setTypingGame] = useState(false);
 
-    const handleButtonClick = () => {
-        setTypingGame(true);
+    const handleButtonClick = (event) => {
     };
 
-    return (
-        <div>
-            <button class="begin-button" onClick={handleButtonClick}>begin</button>
-            {TypingGame && <TypingGame />}
-        </div>
-    );
-
+    if (Auth.loggedIn()) {
+        return (
+            <div>
+                <Link to="/play">
+                    <button class="begin-button" onClick={handleButtonClick}>begin</button>
+                </Link>
+            </div>
+        );
+    } else {
+        return;
+    }
 }
 
 export default BeginButton;
