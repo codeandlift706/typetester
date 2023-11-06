@@ -105,7 +105,7 @@ function TypingGame() {
     }
 
     return (
-        <div className="container">
+        <div className="game-container">
             <div className="typing-text">{typedText}</div>
             <input
                 type="text"

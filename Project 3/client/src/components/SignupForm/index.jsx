@@ -113,7 +113,7 @@ function SignupForm(props) { //do we need props?
                     </div>
                 </div>
                 <div>
-                    <button className="begin-button" type="submit">submit</button>
+                    <button className="submit-button" type="submit">submit</button>
                 </div>
             </form>
         </div>

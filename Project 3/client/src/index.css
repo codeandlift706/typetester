@@ -8,6 +8,7 @@
   --hover-color: black;
   --container-color: white;
   --button-color: rgb(0, 162, 255)115, 115, 219;
+  --click-color: #c6c6c6;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -56,7 +57,9 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: #646cff;
+  background-color: var(--click-color);
+  size: 85%
 }
 
 @media (prefers-color-scheme: light) {
@@ -113,7 +116,19 @@ li {
 
 .game-container {
   display: flex;
+  position: absolute;
   align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 400px;
+  box-shadow: 0px 0px 8px rgb(158, 158, 158);
+  background-color: var(--container-color);
+  border-radius: 5px;
+  color: black;
 }
 
 .typing-text {
@@ -132,6 +147,14 @@ li {
 .begin-button {
   background-color: var(--background-color);
   color: black;
+}
+
+.submit-button {
+  background-color: var(--background-color);
+  color: black;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .login-container {
@@ -166,4 +189,18 @@ li {
     width: 300px;
     height: 350px;
   }
+}
+
+.header {
+  display: flex;
+  align-items:center;
+  flex-direction: column;
+  justify-content:center;
+  position: fixed;
+}
+
+.input-field {
+  width: 600px;
+  height: 80px;
+  
 }
