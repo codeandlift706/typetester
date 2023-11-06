@@ -3,14 +3,14 @@ import { gql } from '@apollo/client';
 
 // Add a new user
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
+  mutation addUser($firstName: String!, $lastName: String!, $username: String!, $email: String!, $password: String!) {
+    addUser(firstName: $firstName, lastName: $lastName, username: $username, email: $email, password: $password) {
       token
       user {
         _id
-        username
         firstName
         lastName
+        username
         email
       }
     }
@@ -24,9 +24,9 @@ export const LOGIN = gql`
       token
       user {
         _id
-        username
         firstName
         lastName
+        username
         email
       }
     }
@@ -35,8 +35,8 @@ export const LOGIN = gql`
 
 // Update a user by ID
 export const UPDATE_USER = gql`
-  mutation updateUser($id: ID!, $username: String, $email: String, $password: String) {
-    updateUser(_id: $id, username: $username, email: $email, password: $password) {
+  mutation updateUser($username: String) {
+    updateUser(username: $username) {
       _id
       username
       firstName
@@ -46,10 +46,10 @@ export const UPDATE_USER = gql`
   }
 `;
 
-// Delete a user by ID
-export const DELETE_USER = gql`
-  mutation deleteUser($id: ID!) {
-    deleteUser(_id: $id) {
+// Remove a user by ID
+export const REMOVE_USER = gql`
+  mutation removeUser($userId: ID!) {
+    removeUser(userId: $id) {
       _id
       username
       firstName
@@ -59,10 +59,10 @@ export const DELETE_USER = gql`
   }
 `;
 
-// Delete a score by ID
-export const DELETE_SCORE = gql`
-  mutation deleteScore($id: ID!) {
-    deleteScore(_id: $id) {
+// Remove a score by ID
+export const REMOVE_SCORE = gql`
+  mutation removeScore($scoreId: ID!) {
+    removeScore(scoreId: $id) {
       _id
       score
       user {

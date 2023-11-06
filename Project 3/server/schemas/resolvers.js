@@ -1,13 +1,13 @@
-const { User, Score } = require('../models');
+const { User, Score, Prompt } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        users: async () => { //GOOD -- do we still need? this or query scores can be for scoreboard?
+        users: async () => { // do we still need? this or query scores can be for scoreboard?
             return User.find().populate('scores');
         },
 
-        user: async (parent, { username }) => { //GOOD
+        user: async (parent, { username }) => { 
             return User.findOne({ username }).populate('scores');
         },
 
@@ -15,16 +15,25 @@ const resolvers = {
             const params = userId ? { userId } : {};
             return Score.find(params).sort({ createdAt: -1 }); //latest score first
         },
+        prompts: async () => {
+            return Prompt.find();
+        },
+        me: async (parent, args, context) => {
+            if (context.user) {
+                return User.findOne({ _id: context.user._id }).populate('scores');
+            }
+            throw AuthenticationError;
+        },
     },
 
     Mutation: {
-        addUser: async (parent, { firstName, lastName, username, email, password }) => { //GOOD
+        addUser: async (parent, { firstName, lastName, username, email, password }) => {
             const user = await User.create({ firstName, lastName, username, email, password });
             const token = signToken(user);
             return { token, user };
         },
 
-        login: async (parent, { email, password }) => { //GOOD
+        login: async (parent, { email, password }) => { 
             const user = await User.findOne({ email });
 
             if (!user) {
@@ -42,7 +51,7 @@ const resolvers = {
             return { token, user };
         },
 
-        removeUser: async (parent, { userId }, context) => { //GOOD
+        removeUser: async (parent, { userId }, context) => { //REVIEW!!!
             if (context.user) {
                 await User.findOneAndDelete(
                     { _id: userId }
@@ -54,21 +63,23 @@ const resolvers = {
             ('You need to be logged in!');
         },
 
-        updateUser: async (parent, { userId, username }, context) => { //GOOD
+        updateUser: async (parent, { username }, context) => { 
             if (context.user) {
-                const user = await User.findOneAndUpdate(
-                    { _id: userId },
-                    { username },
-                    { new: true });
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $set: { username } },
+                    //return the newly updated
+                    { new: true }
+                    );
 
-                return user;
+                return updatedUser;
             }
             throw AuthenticationError;
             ('You need to be logged in!');
         },
 
 
-        removeScore: async (parent, { userId, scoreId }, context) => { //GOOD
+        removeScore: async (parent, { userId, scoreId }, context) => { //REVIEW!!!
             if (context.user) {
                 const score = await Score.findOneAndDelete({
                     _id: scoreId,

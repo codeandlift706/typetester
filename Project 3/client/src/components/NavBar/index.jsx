@@ -2,48 +2,51 @@ import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
 
 function NavBar() {
+    const isHomepage = window.location.pathname === "/";
 
     function showNavigation() {
         if (Auth.loggedIn()) {
             return (
                 <ul className="flex-row">
                     <li className="mx-1">
-                        <Link to="/profile"> 
-                            profile 
+                        <Link to="/profile/me"> 
+                            Profile 
                         </Link>
                     </li>
                     <li className="mx-1">
                         <a href="/" onClick={() => Auth.logout()}>
-                            logout
+                            Logout
                         </a>
                     </li>
+                    {!isHomepage && <li className="mx-1"><Link to="/">Homepage</Link></li>}
                 </ul>
             );
         } else {
             return (
-                <ul className="flex-row">
-                    <li className="mx-1">
-                        <Link to="/signup">
-                            signup
-                        </Link>
-                    </li>
+                <div className="account-buttons flex-row">
+                    
                     <li className="mx-1">
                         <Link to="/login">
                             login
                         </Link>
                     </li>
-                </ul>
+                    <li className="mx-1">
+                        <Link to="/signup">
+                            signup
+                        </Link>
+                    </li>
+                </div>
             );
         }
     }
 
     return (
-        <header className="flex-row px-1">
-            <h1>
+        <header className="account-buttons flex-row mx-1">
+            <li>
                 <Link to="/score">
-                    scoreboard
+                    Scoreboard
                 </Link>
-            </h1>
+            </li>
 
             <nav>
                 {showNavigation()}
