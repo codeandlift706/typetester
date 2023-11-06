@@ -56,7 +56,7 @@ function SignupForm(props) { //do we need props?
                     <label htmlFor="firstName">First Name</label>
                     <div>
                     <input
-                        placeholder="First"
+                        placeholder="first"
                         name="firstName"
                         type="firstName"
                         id="firstName"
@@ -68,7 +68,7 @@ function SignupForm(props) { //do we need props?
                     <label htmlFor="lastName">Last Name</label>
                     <div>
                     <input
-                        placeholder="Last"
+                        placeholder="last"
                         name="lastName"
                         type="lastName"
                         id="lastName"
@@ -113,7 +113,7 @@ function SignupForm(props) { //do we need props?
                     </div>
                 </div>
                 <div>
-                    <button className="begin-button" type="submit">Submit</button>
+                    <button className="begin-button" type="submit">submit</button>
                 </div>
             </form>
         </div>

@@ -51,7 +51,7 @@ function LoginForm(props) { //do we need props?
             <p class="title">login</p>
             <form onSubmit={handleFormSubmit}>
                 <div>
-                    <label class="login-labels" htmlFor="email"><b>Email address</b></label>
+                    <label class="login-labels" htmlFor="email"><b>email address</b></label>
                     <div>
                     <input
                         placeholder="youremail@test.com"
@@ -63,7 +63,7 @@ function LoginForm(props) { //do we need props?
                     </div>
                 </div>
                 <div>
-                    <label class="login-labels" htmlFor="pwd"><b>Password</b></label>
+                    <label class="login-labels" htmlFor="pwd"><b>password</b></label>
                     <div>
                     <input
                         placeholder="******"
@@ -80,7 +80,7 @@ function LoginForm(props) { //do we need props?
                     </div>
                 ) : null}
                 <div>
-                    <button class="begin-button" type="submit">Submit</button>
+                    <button class="begin-button" type="submit">submit</button>
                 </div>
             </form>
         </div>
