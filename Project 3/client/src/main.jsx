@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import Score from './pages/Score';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
+import TypingGame from './components/TypingGame/TypingGame';
 import './index.css'
 
 const router = createBrowserRouter([
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
                 path: '/signup',
                 element: <SignupForm />
             },
+            {
+                path: '/play',
+                element: <TypingGame />
+            }
         ]
     }
 ]);

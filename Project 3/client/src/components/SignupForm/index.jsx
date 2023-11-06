@@ -47,13 +47,14 @@ function SignupForm(props) { //do we need props?
 
 
     return (
-        <div className="container">
+        <div className="login-container">
             {/* <Link to="/login">← Go to Login</Link> */}
 
-            <h2>Signup</h2>
+            <p className="title">signup</p>
             <form onSubmit={handleFormSubmit}>
                 <div>
-                    <label htmlFor="firstName">First Name:</label>
+                    <label htmlFor="firstName">First Name</label>
+                    <div>
                     <input
                         placeholder="First"
                         name="firstName"
@@ -61,9 +62,11 @@ function SignupForm(props) { //do we need props?
                         id="firstName"
                         onChange={handleChange}
                     />
+                    </div>
                 </div>
                 <div>
-                    <label htmlFor="lastName">Last Name:</label>
+                    <label htmlFor="lastName">Last Name</label>
+                    <div>
                     <input
                         placeholder="Last"
                         name="lastName"
@@ -71,9 +74,11 @@ function SignupForm(props) { //do we need props?
                         id="lastName"
                         onChange={handleChange}
                     />
+                    </div>
                 </div>
                 <div>
-                    <label htmlFor="username">Username:</label>
+                    <label htmlFor="username">Username</label>
+                    <div>
                     <input
                         placeholder="username"
                         name="username"
@@ -81,9 +86,11 @@ function SignupForm(props) { //do we need props?
                         id="username"
                         onChange={handleChange}
                     />
+                    </div>
                 </div>
                 <div>
-                    <label htmlFor="email">Email:</label>
+                    <label htmlFor="email">Email</label>
+                    <div>
                     <input
                         placeholder="youremail@test.com"
                         name="email"
@@ -91,9 +98,11 @@ function SignupForm(props) { //do we need props?
                         id="email"
                         onChange={handleChange}
                     />
+                    </div>
                 </div>
                 <div>
-                    <label htmlFor="pwd">Password:</label>
+                    <label htmlFor="pwd">Password</label>
+                    <div>
                     <input
                         placeholder="******"
                         name="password"
@@ -101,9 +110,10 @@ function SignupForm(props) { //do we need props?
                         id="pwd"
                         onChange={handleChange}
                     />
+                    </div>
                 </div>
                 <div>
-                    <button type="submit">Submit</button>
+                    <button className="begin-button" type="submit">Submit</button>
                 </div>
             </form>
         </div>

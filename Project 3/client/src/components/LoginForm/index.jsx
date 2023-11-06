@@ -46,12 +46,13 @@ function LoginForm(props) { //do we need props?
     };
 
     return (
-        <div>
+        <div class="login-container">
             {/* <Link to="/signup">← Go to Signup</Link> */}
-            <h2>Login</h2>
+            <p class="title">login</p>
             <form onSubmit={handleFormSubmit}>
                 <div>
-                    <label htmlFor="email">Email address:</label>
+                    <label class="login-labels" htmlFor="email"><b>Email address</b></label>
+                    <div>
                     <input
                         placeholder="youremail@test.com"
                         name="email"
@@ -59,9 +60,11 @@ function LoginForm(props) { //do we need props?
                         id="email"
                         onChange={handleChange}
                     />
+                    </div>
                 </div>
                 <div>
-                    <label htmlFor="pwd">Password:</label>
+                    <label class="login-labels" htmlFor="pwd"><b>Password</b></label>
+                    <div>
                     <input
                         placeholder="******"
                         name="password"
@@ -69,6 +72,7 @@ function LoginForm(props) { //do we need props?
                         id="pwd"
                         onChange={handleChange}
                     />
+                    </div>
                 </div>
                 {error ? (
                     <div>
@@ -76,7 +80,7 @@ function LoginForm(props) { //do we need props?
                     </div>
                 ) : null}
                 <div>
-                    <button type="submit">Submit</button>
+                    <button class="begin-button" type="submit">Submit</button>
                 </div>
             </form>
         </div>
