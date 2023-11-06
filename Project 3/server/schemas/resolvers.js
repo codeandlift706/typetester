@@ -79,15 +79,15 @@ const resolvers = {
         },
 
 
-        addScore: async (parent, { userId, scoreId }, context) => { //REVIEW!!!
+        addScore: async (parent, { wpm }, context) => { //REVIEW!!!
             if (context.user) {
                 const score = await Score.create({
-                    score
+                    score:wpm, user:context.user._id
                 });
 
                 await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $addToSet: { scores: score } }
+                    { $addToSet: { scores: score._id } }
                 );
 
                 return score;
