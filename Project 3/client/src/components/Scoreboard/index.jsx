@@ -15,6 +15,7 @@ const Scoreboard = () => {
     const scores = data?.scores || []; //check if there's a data object and score property, if not, create an empty array
     // const user = data?.user || {}; //check if there's a data object and user property, if not, create an empty array
 
+    // console.log(data.data.scores[0].score);
     // const handleRemoveScore = async (scoreId) => {
 
     //     try {
@@ -28,32 +29,35 @@ const Scoreboard = () => {
     //     }
     // };
 
-    if (!scores.length) { //if there are no scores
-        return <h3>No Scores Yet</h3>;
+    // if (!scores.length) { //if there are no scores
+    //     return <h3>No Scores Yet</h3>;
+    // }
+
+    for (let i = 0; i < scores.length; i++) {
+        const score = scores[i].score;
+        const username = scores[i].user.username;
+        console.log(`Score: ${score}, Username: ${username}`);
     }
 
     if (loading) {
         return <h3>LOADING...</h3>;
     }
 
+
+    const scoreItems = scores.map((scoreObject) => {
+        const score = scoreObject.score;
+        const username = scoreObject.user.username;
+        return (
+            <p key={score}>
+                Score: {score}, Username: {username}
+            </p>
+        );
+    });
+
     return (
-        <table>
-            {scores &&
-                scores.map((score) => ( //map over each score, create a key so that react can identify that item being mapped over
-                // table row
-                    <tr key={score.id}> 
-                        {/* table data */}
-                        <td> 
-                            {/* {user.username} .......... {score.score} */}
-                            {/* {user.id === score.userId && ( //if the score's userid matches yours, the user's, display remove score button
-                                <button onClick={() => handleRemoveScore(score.id)}>
-                                    Remove
-                                </button>
-                            )} */}
-                        </td>
-                    </tr>
-                ))}
-        </table>
+        <>
+            {scoreItems}
+        </>
     );
 };
 
