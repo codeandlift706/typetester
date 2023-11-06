@@ -9,8 +9,8 @@ function NavBar() {
             return (
                 <ul className="flex-row">
                     <li className="mx-1">
-                        <Link to="/profile/me"> 
-                            Profile 
+                        <Link to="/profile/me">
+                            Profile
                         </Link>
                     </li>
                     <li className="mx-1">
@@ -24,7 +24,7 @@ function NavBar() {
         } else {
             return (
                 <div className="account-buttons flex-row">
-                    
+
                     <li className="mx-1">
                         <Link to="/login">
                             login
@@ -35,6 +35,11 @@ function NavBar() {
                             signup
                         </Link>
                     </li>
+                    <li>
+                        <Link to="/score">
+                            scoreboard
+                        </Link>
+                    </li>
                 </div>
             );
         }
@@ -42,12 +47,6 @@ function NavBar() {
 
     return (
         <header className="account-buttons flex-row mx-1">
-            <li>
-                <Link to="/score">
-                    Scoreboard
-                </Link>
-            </li>
-
             <nav>
                 {showNavigation()}
             </nav>

@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <div className="coffee-button" style={{ position: 'fixed', bottom: '0', right: '0', margin: '10px' }}>
+    <div className="coffee-button" style={{ position: 'relative', bottom: '0', right: '0', margin: '10px' }}>
       <a href='https://ko-fi.com/T6T2QRAJ9' target='_blank'>
         <img
           height='36'
