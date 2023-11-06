@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import './TypingGame.css';
 import { useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { QUERY_PROMPTS } from '../../utils/queries';
-import { LoadingContext } from '../TypingGame/LoadingContext';
+import { ADD_SCORE } from '../../utils/mutations';
+import { LoadingContext } from './LoadingContext';
 
 function TypingGame() {
     const { loading } = useContext(LoadingContext);
     const { data } = useQuery(QUERY_PROMPTS);
-    const prompts = data?.prompts?.map(prompt => prompt.text) || [];
+    const prompts = data?.prompts?.map((prompt) => prompt.text) || [];
 
     const [typingText, setTypingText] = useState('');
     const [userInput, setUserInput] = useState('');
@@ -19,11 +21,13 @@ function TypingGame() {
     const [numIncorrect, setNumIncorrect] = useState(0);
     const inputRef = useRef(null);
 
+    const [addScore] = useMutation(ADD_SCORE);
+
     const loadPrompt = () => {
         const randomPrompt = Math.floor(Math.random() * prompts.length);
         const content = [...prompts[randomPrompt]];
         setTypingText(content.join('')); // join the array of characters into a string
-    }
+    };
 
     const handleInputChange = (event) => {
         const input = event.target.value;
@@ -51,16 +55,17 @@ function TypingGame() {
         } else {
             console.log('Wrong');
         }
+
         const value = event.target.value;
         const lastChar = value[value.length - 1];
         const lastPromptChar = typingText[userInput.length];
-    
+
         if (lastChar === lastPromptChar) {
-          setUserInput(value);
+            setUserInput(value);
         } else {
-          setNumIncorrect(numIncorrect + 1);
+            setNumIncorrect(numIncorrect + 1);
         }
-    }
+    };
 
     const handleReset = () => {
         setTypingText('');
@@ -73,7 +78,7 @@ function TypingGame() {
         setNumIncorrect(0);
         loadPrompt();
         inputRef.current.focus();
-    }
+    };
 
     useEffect(() => {
         if (data) {
@@ -91,6 +96,10 @@ function TypingGame() {
             const numCorrect = typingText.length - numIncorrect;
             const accuracy = Math.round((numCorrect / typingText.length) * 100);
             setAccuracy(accuracy);
+
+            addScore({
+                variables: { wpm: wpm },
+            });
         }
     }, [endTime]);
 

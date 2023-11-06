@@ -77,8 +77,8 @@ export const REMOVE_SCORE = gql`
 
 // Add a score by ID
 export const ADD_SCORE = gql`
-  mutation addScore($userId: ID!, $scoreId: ID!) {
-    addScore(userId: $userId, scoreId: $id) {
+  mutation addScore($userId: ID!, $score: Int!) {
+    addScore(userId: $userId, score: $score) {
       _id
       score
       user {
