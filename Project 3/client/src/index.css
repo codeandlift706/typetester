@@ -138,6 +138,7 @@ li {
   margin-right: 40px;
   margin-left: 40px;
   margin-top: 80px;
+  position: relative;
 }
 
 .coffee-button {
@@ -153,8 +154,10 @@ li {
 }
 
 .submit-button {
+  display:flex;
   background-color: var(--background-color);
   color: black;
+  margin-top: 10px;
 }
 
 .reset-button {
@@ -187,6 +190,25 @@ li {
   overflow: auto;
 }
 
+.signup-container {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 450px;
+  box-shadow: 0px 0px 8px rgb(158, 158, 158);
+  background-color: var(--container-color);
+  border-radius: 5px;
+  color: black;
+  animation: shrink-signup 1s forwards;
+  overflow: auto;
+}
+
 .login-labels {
   font-size: 12px;
 }
@@ -199,6 +221,17 @@ li {
   to {
     width: 300px;
     height: 350px;
+  }
+}
+
+@keyframes shrink-signup {
+  from {
+    width: 500px;
+    height: 300px;
+  }
+  to {
+    width: 300px;
+    height: 450px;
   }
 }
 
@@ -241,4 +274,42 @@ li {
 
 .hidden-div {
   animation: fade 2s forwards;
+}
+
+.score-container {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 350px;
+  box-shadow: 0px 0px 8px rgb(158, 158, 158);
+  background-color: var(--container-color);
+  border-radius: 5px;
+  color: black;
+  animation: shrink 1s forwards;
+  overflow: auto;
+}
+
+.user-settings-container {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 350px;
+  box-shadow: 0px 0px 8px rgb(158, 158, 158);
+  background-color: var(--container-color);
+  border-radius: 5px;
+  color: black;
+  animation: shrink 1s forwards;
+  overflow: auto;
 }

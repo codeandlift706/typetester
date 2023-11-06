@@ -92,14 +92,14 @@ const Profile = () => {
   }
 
   return (
-    <>
+    <div className="user-settings-container">
       <NavBar />
       <div>
         <p>
           Logged in as: {user.username}
         </p>
 
-        <div className="user-settings-container">
+        <div>
           <h2>
             Welcome to {userParam ? `${user.username}'s` : 'your'} profile!
           </h2>
@@ -137,8 +137,7 @@ const Profile = () => {
 
         </div>
       </div>
-      <Footer />
-    </>
+    </div>
   );
 };
 
