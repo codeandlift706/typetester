@@ -61,8 +61,8 @@ export const REMOVE_USER = gql`
 
 // Remove a score by ID
 export const REMOVE_SCORE = gql`
-  mutation removeScore($scoreId: ID!) {
-    removeScore(scoreId: $id) {
+  mutation removeScore($userId: ID!, $scoreId: ID!) {
+    removeScore(userId: $userId, scoreId: $id) {
       _id
       score
       user {
@@ -75,35 +75,18 @@ export const REMOVE_SCORE = gql`
   }
 `;
 
-// Add a new comment
-export const ADD_COMMENT = gql`
-    mutation addComment($text: String!, $userId: ID!) {
-        addComment(text: $text, userId: $userId) {
-            _id
-            text
-            user {
-                _id
-                username
-                firstName
-                lastName
-            }
-        }
+// Add a score by ID
+export const ADD_SCORE = gql`
+  mutation addScore($userId: ID!, $scoreId: ID!) {
+    addScore(userId: $userId, scoreId: $id) {
+      _id
+      score
+      user {
+        _id
+        username
+        firstName
+        lastName
+      }
     }
+  }
 `;
-
-// Update a comment by ID
-export const UPDATE_COMMENT = gql`
-    mutation updateComment($id: ID!, $text: String!) {
-        updateComment(_id: $id, text: $text) {
-            _id
-            text
-            user {
-                _id
-                username
-                firstName
-                lastName
-            }
-        }
-    }
-`;
-

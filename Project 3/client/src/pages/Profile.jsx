@@ -6,7 +6,6 @@ import { Navigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
-// import { REMOVE_USER } from '../utils/mutations';
 import { UPDATE_USER } from '../utils/mutations';
 
 const Profile = () => {
@@ -20,33 +19,13 @@ const Profile = () => {
   const [userFormState, setUserFormState] = useState({ username: '' })
   const [showUsernameUpdateForm, setShowUsernameUpdateForm] = useState(false); //show "User Settings" button
 
-
   const [updateUser, { error }] = useMutation(UPDATE_USER);
-  // const [removeUser, { error }] = useMutation(REMOCE_USER); //Create a custom hook for this?? create a new function where it equals this whole thing. Maybe don't need removeUser
 
   const user = data?.me || {}; //check if data has user property
   // console.log(user); //shows the user's info as an object
   // console.log(user.username); //shows the current username
   const canUpdateUsername = userParam === user.id; //shows on profile page if you can update username
 
-
-  // const handleRemoveUser = async (userId) => {
-  //   const token = Auth.loggedIn() ? Auth.getToken() : null; //check if we have these
-
-  //   if (!token) {
-  //     return false
-  //   }
-
-  //   try {
-  //     const { data } = await removeUser({
-  //       variables: { userId } //remove user by its id. userId = userId
-  //     })
-
-  //     //upon success, remove user ID and associated scores from localstorage ? -- redirect the user to the home page
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
   //collect user input
   const handleUsernameChange = (event) => {
@@ -89,26 +68,6 @@ const Profile = () => {
       }
 
       return data;
-
-      // Variable to hold our updated user object
-      // const updatedUser = {
-      //   ...data
-      //   // ...user, //user object with all info (email, firstName, lastName, username, scores)
-      //   // ...userFormState, //new username to overwrite previous username
-      // };
-
-      // if (updatedUser) {
-      //   // Username update was successful, display an alert
-      //   alert('Username updated successfully!');
-      // } else {
-      //   alert('Username update failed. Please try again.');
-      // }
-
-      // console.log(updatedUser);
-      // console.log(userFormState); //returns updated username
-      // return {
-      //   user: updatedUser, //return the updated user
-      // };
 
     } catch (err) {
       console.error(err)
@@ -176,10 +135,6 @@ const Profile = () => {
             {user.scores?.length > 0 && <Scoreboard scores={user.scores} />}
           </h2>
 
-          {/* Button to remove user */}
-          {/* <Button onClick={() => handleRemoveUser(user.userId)}>
-          Remove Your Profile
-        </Button> */}
         </div>
       </div>
       <Footer />
