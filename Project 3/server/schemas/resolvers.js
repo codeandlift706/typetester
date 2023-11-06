@@ -1,5 +1,5 @@
 const { User, Score, Prompt } = require('../models');
-const { AuthenticationError } = require('../utils/auth');
+const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
@@ -13,7 +13,7 @@ const resolvers = {
 
         scores: async (parent, { userId }) => { //REVIEW!!!
             const params = userId ? { userId } : {};
-            return Score.find(params).sort({ createdAt: -1 }); //latest score first
+            return Score.find(params).sort({ createdAt: -1 }).populate('user'); //latest score first
         },
         prompts: async () => {
             return Prompt.find();

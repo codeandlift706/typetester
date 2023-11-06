@@ -131,10 +131,6 @@ const Profile = () => {
             {showUsernameUpdateForm ? 'Close User Settings' : 'User Settings'}
           </button>
 
-          <h2>
-            {user.scores?.length > 0 && <Scoreboard scores={user.scores} />}
-          </h2>
-
         </div>
       </div>
       <Footer />
