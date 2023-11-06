@@ -79,6 +79,23 @@ const resolvers = {
         },
 
 
+        addScore: async (parent, { userId, scoreId }, context) => { //REVIEW!!!
+            if (context.user) {
+                const score = await Score.findOneAndDelete({
+                    _id: scoreId,
+                });
+
+                await User.findOneAndUpdate(
+                    { _id: userId },
+                    { $addToSet: { scores: score._id } }
+                );
+
+                return score;
+            }
+            throw AuthenticationError;
+        },
+
+
         removeScore: async (parent, { userId, scoreId }, context) => { //REVIEW!!!
             if (context.user) {
                 const score = await Score.findOneAndDelete({
