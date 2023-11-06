@@ -80,7 +80,7 @@ function LoginForm(props) { //do we need props?
                     </div>
                 ) : null}
                 <div>
-                    <button class="begin-button" type="submit">submit</button>
+                    <button class="submit-button" type="submit">submit</button>
                 </div>
             </form>
         </div>
