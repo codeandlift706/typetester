@@ -87,10 +87,10 @@ export const REMOVE_SCORE = gql`
         firstName
         lastName
         email
-scores {
-  _id
-  score
-}
+        scores {
+          _id
+          score
+        }
       }
     }
   }

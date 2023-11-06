@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import './TypingGame.css';
 import { useQuery, useMutation } from '@apollo/client';
-import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_PROMPTS } from '../../utils/queries';
 import { ADD_SCORE } from '../../utils/mutations';
 import { LoadingContext } from './LoadingContext';
-import { ADD_SCORE } from '../../utils/mutations';
-import Auth from '../../utils/auth';
 
-function TypingGame({ userId }) {
+function TypingGame() {
     const { loading } = useContext(LoadingContext);
     const { data } = useQuery(QUERY_PROMPTS);
     const prompts = data?.prompts?.map((prompt) => prompt.text) || [];
@@ -133,25 +130,6 @@ function TypingGame({ userId }) {
 
         return <span key={index} className={className}>{char}</span>;
     });
-
-    const handleScoreSubmit = async (event) => {
-        event.preventDefault();
-        
-        try {
-            const { data } = await addScore({
-                variables: {
-                    // userId: userId,
-                    score: wpm,
-                },
-            });
-            const token = data.addScore.token;
-            Auth.login(token);
-            console.log(token);
-
-        } catch (err) {
-            console.error(err);
-        }
-    };
 
     if (loading) {
         return <div>Loading...</div>;
