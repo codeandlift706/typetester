@@ -1,57 +1,75 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import './TypingGame.css';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_PROMPTS } from '../../utils/queries';
-import { LoadingContext } from '../TypingGame/LoadingContext';
+import { ADD_SCORE } from '../../utils/mutations';
+import { LoadingContext } from './LoadingContext';
 
 function TypingGame() {
     const { loading } = useContext(LoadingContext);
     const { data } = useQuery(QUERY_PROMPTS);
-    const prompts = data?.prompts?.map(prompt => prompt.text) || [];
-
+    const prompts = data?.prompts?.map((prompt) => prompt.text) || [];
+    const [addScore] = useMutation(ADD_SCORE);
     const [typingText, setTypingText] = useState('');
     const [userInput, setUserInput] = useState('');
     const [startTime, setStartTime] = useState(null);
     const [endTime, setEndTime] = useState(null);
     const [wpm, setWpm] = useState(0);
     const [elapsedTime, setElapsedTime] = useState(0);
-
+    const [accuracy, setAccuracy] = useState(null);
+    const [numIncorrect, setNumIncorrect] = useState(0);
     const inputRef = useRef(null);
 
+    // Load a random prompt from the database
     const loadPrompt = () => {
         const randomPrompt = Math.floor(Math.random() * prompts.length);
         const content = [...prompts[randomPrompt]];
         setTypingText(content.join('')); // join the array of characters into a string
-    }
+    };
 
+    // Handle changes to the input field
     const handleInputChange = (event) => {
         const input = event.target.value;
         setUserInput(input);
-    
+
+        // Start the timer if it hasn't started yet
         if (startTime === null) {
             setStartTime(Date.now());
         }
-    
+
+        // Stop the timer if the user has typed the entire prompt
         if (input === typingText) {
             setEndTime(Date.now());
         }
-    
+
+        // Check if the user's input matches the prompt
         let isMatch = true;
-    
+
         for (let i = 0; i < input.length; i++) {
             if (input[i] !== typingText[i]) {
                 isMatch = false;
                 break;
             }
         }
-    
+
         if (isMatch) {
             console.log('Match!');
         } else {
             console.log('Wrong');
         }
-    }
 
+        const value = event.target.value;
+        const lastChar = value[value.length - 1];
+        const lastPromptChar = typingText[userInput.length];
+
+        if (lastChar === lastPromptChar) {
+            setUserInput(value);
+        } else {
+            setNumIncorrect(numIncorrect + 1);
+        }
+    };
+
+    // Reset the game
     const handleReset = () => {
         setTypingText('');
         setUserInput('');
@@ -59,10 +77,13 @@ function TypingGame() {
         setEndTime(null);
         setWpm(0);
         setElapsedTime(0);
+        setAccuracy(null);
+        setNumIncorrect(0);
         loadPrompt();
         inputRef.current.focus();
-    }
+    };
 
+    // Load a new prompt when the component mounts or when the data changes
     useEffect(() => {
         if (data) {
             loadPrompt();
@@ -70,15 +91,24 @@ function TypingGame() {
         }
     }, [data]);
 
+    // Calculate the WPM and accuracy when the user finishes typing the prompt
     useEffect(() => {
         if (endTime !== null) {
             const elapsedTime = (endTime - startTime) / 1000; // convert to seconds
             const words = typingText.split(' ').length;
             const wpm = Math.round(words / (elapsedTime / 60));
             setWpm(wpm);
+            const numCorrect = typingText.length - numIncorrect;
+            const accuracy = Math.round((numCorrect / typingText.length) * 100);
+            setAccuracy(accuracy);
+            // Add the score to the database
+            addScore({
+                variables: { wpm: wpm },
+            });
         }
     }, [endTime]);
 
+    // Update the elapsed time every second
     useEffect(() => {
         const interval = setInterval(() => {
             if (startTime !== null && endTime === null) {
@@ -90,6 +120,7 @@ function TypingGame() {
         return () => clearInterval(interval);
     }, [startTime, endTime]);
 
+    // Display the prompt with correct/incorrect characters highlighted
     const typedText = typingText.split('').map((char, index) => {
         let className = '';
 
@@ -121,6 +152,9 @@ function TypingGame() {
                     </div>
                     <div className="stat">
                         WPM: {wpm}
+                    </div>
+                    <div className="stat">
+                        Accuracy: {accuracy}%
                     </div>
                 </div>
             )}
