@@ -26,7 +26,7 @@ const Profile = () => {
   // console.log(user.username); //shows the current username
   const canUpdateUsername = userParam === user.id; //shows on profile page if you can update username
 
-
+  
   //collect user input
   const handleUsernameChange = (event) => {
     const { name, value } = event.target;

@@ -79,15 +79,13 @@ const resolvers = {
         },
 
 
-        addScore: async (parent, { userId, scoreId }, context) => { //REVIEW!!!
+        addScore: async (parent, { score }, context) => { //REVIEW!!!
             if (context.user) {
-                const score = await Score.findOneAndDelete({
-                    _id: scoreId,
-                });
+                const score = await Score.create({ score });
 
                 await User.findOneAndUpdate(
-                    { _id: userId },
-                    { $addToSet: { scores: score._id } }
+                    { _id: context.user._id },
+                    { $addToSet: { scores: score } }
                 );
 
                 return score;
@@ -96,10 +94,10 @@ const resolvers = {
         },
 
 
-        removeScore: async (parent, { userId, scoreId }, context) => { //REVIEW!!!
+        removeScore: async (parent, { score, userId }, context) => { //REVIEW!!!
             if (context.user) {
                 const score = await Score.findOneAndDelete({
-                    _id: scoreId,
+                    score: score,
                 });
 
                 await User.findOneAndUpdate(

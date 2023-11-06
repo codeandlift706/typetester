@@ -39,7 +39,7 @@ const typeDefs = `
         addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
         updateUser(username: String): User
         removeUser(userId: ID!): User
-        addScore(userId: ID!, scoreId: ID!): Score
+        addScore(score: Int!): Score
         removeScore(userId: ID!, scoreId: ID!): Score
     }
 `;

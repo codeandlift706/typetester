@@ -12,6 +12,10 @@ export const ADD_USER = gql`
         lastName
         username
         email
+        scores {
+          _id
+          score
+        }
       }
     }
   }
@@ -28,6 +32,10 @@ export const LOGIN = gql`
         lastName
         username
         email
+        scores {
+          _id
+          score
+        }
       }
     }
   }
@@ -42,6 +50,10 @@ export const UPDATE_USER = gql`
       firstName
       lastName
       email
+      scores {
+        _id
+        score
+      }
     }
   }
 `;
@@ -55,6 +67,10 @@ export const REMOVE_USER = gql`
       firstName
       lastName
       email
+      scores {
+        _id
+        score
+      }
     }
   }
 `;
@@ -70,6 +86,11 @@ export const REMOVE_SCORE = gql`
         username
         firstName
         lastName
+        email
+scores {
+  _id
+  score
+}
       }
     }
   }
@@ -77,8 +98,8 @@ export const REMOVE_SCORE = gql`
 
 // Add a score by ID
 export const ADD_SCORE = gql`
-  mutation addScore($userId: ID!, $scoreId: ID!) {
-    addScore(userId: $userId, scoreId: $id) {
+  mutation addScore($score: Int!) {
+    addScore(score: $score) {
       _id
       score
       user {
@@ -86,6 +107,7 @@ export const ADD_SCORE = gql`
         username
         firstName
         lastName
+        email
       }
     }
   }

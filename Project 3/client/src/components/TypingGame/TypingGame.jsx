@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import './TypingGame.css';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_PROMPTS } from '../../utils/queries';
 import { LoadingContext } from '../TypingGame/LoadingContext';
+import { ADD_SCORE } from '../../utils/mutations';
+import Auth from '../../utils/auth';
 
-function TypingGame() {
+function TypingGame({ userId }) {
     const { loading } = useContext(LoadingContext);
     const { data } = useQuery(QUERY_PROMPTS);
     const prompts = data?.prompts?.map(prompt => prompt.text) || [];
@@ -15,6 +17,9 @@ function TypingGame() {
     const [endTime, setEndTime] = useState(null);
     const [wpm, setWpm] = useState(0);
     const [elapsedTime, setElapsedTime] = useState(0);
+
+    const [score, setScore] = useState(0);
+    const [addScore, { error }] = useMutation(ADD_SCORE);
 
     const inputRef = useRef(null);
 
@@ -27,24 +32,24 @@ function TypingGame() {
     const handleInputChange = (event) => {
         const input = event.target.value;
         setUserInput(input);
-    
+
         if (startTime === null) {
             setStartTime(Date.now());
         }
-    
+
         if (input === typingText) {
             setEndTime(Date.now());
         }
-    
+
         let isMatch = true;
-    
+
         for (let i = 0; i < input.length; i++) {
             if (input[i] !== typingText[i]) {
                 isMatch = false;
                 break;
             }
         }
-    
+
         if (isMatch) {
             console.log('Match!');
         } else {
@@ -100,6 +105,25 @@ function TypingGame() {
         return <span key={index} className={className}>{char}</span>;
     });
 
+    const handleScoreSubmit = async (event) => {
+        event.preventDefault();
+        
+        try {
+            const { data } = await addScore({
+                variables: {
+                    // userId: userId,
+                    score: wpm,
+                },
+            });
+            const token = data.addScore.token;
+            Auth.login(token);
+            console.log(token);
+
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -125,6 +149,8 @@ function TypingGame() {
                 </div>
             )}
             <button onClick={handleReset}>Reset</button>
+            <button onClick={handleScoreSubmit}>Submit</button>
+
         </div>
     );
 }
