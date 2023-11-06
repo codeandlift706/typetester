@@ -1,5 +1,5 @@
 const { User, Score, Prompt } = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth');
+const { AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
@@ -81,13 +81,13 @@ const resolvers = {
 
         addScore: async (parent, { userId, scoreId }, context) => { //REVIEW!!!
             if (context.user) {
-                const score = await Score.findOneAndDelete({
-                    _id: scoreId,
+                const score = await Score.create({
+                    score
                 });
 
                 await User.findOneAndUpdate(
-                    { _id: userId },
-                    { $addToSet: { scores: score._id } }
+                    { _id: context.user._id },
+                    { $addToSet: { scores: score } }
                 );
 
                 return score;

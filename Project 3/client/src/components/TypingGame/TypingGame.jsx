@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import './TypingGame.css';
-import { useQuery } from '@apollo/client';
-import { useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_PROMPTS } from '../../utils/queries';
 import { ADD_SCORE } from '../../utils/mutations';
 import { LoadingContext } from './LoadingContext';
@@ -10,7 +9,7 @@ function TypingGame() {
     const { loading } = useContext(LoadingContext);
     const { data } = useQuery(QUERY_PROMPTS);
     const prompts = data?.prompts?.map((prompt) => prompt.text) || [];
-
+    const [addScore] = useMutation(ADD_SCORE);
     const [typingText, setTypingText] = useState('');
     const [userInput, setUserInput] = useState('');
     const [startTime, setStartTime] = useState(null);
@@ -21,26 +20,29 @@ function TypingGame() {
     const [numIncorrect, setNumIncorrect] = useState(0);
     const inputRef = useRef(null);
 
-    const [addScore] = useMutation(ADD_SCORE);
-
+    // Load a random prompt from the database
     const loadPrompt = () => {
         const randomPrompt = Math.floor(Math.random() * prompts.length);
         const content = [...prompts[randomPrompt]];
         setTypingText(content.join('')); // join the array of characters into a string
     };
 
+    // Handle changes to the input field
     const handleInputChange = (event) => {
         const input = event.target.value;
         setUserInput(input);
 
+        // Start the timer if it hasn't started yet
         if (startTime === null) {
             setStartTime(Date.now());
         }
 
+        // Stop the timer if the user has typed the entire prompt
         if (input === typingText) {
             setEndTime(Date.now());
         }
 
+        // Check if the user's input matches the prompt
         let isMatch = true;
 
         for (let i = 0; i < input.length; i++) {
@@ -67,6 +69,7 @@ function TypingGame() {
         }
     };
 
+    // Reset the game
     const handleReset = () => {
         setTypingText('');
         setUserInput('');
@@ -80,6 +83,7 @@ function TypingGame() {
         inputRef.current.focus();
     };
 
+    // Load a new prompt when the component mounts or when the data changes
     useEffect(() => {
         if (data) {
             loadPrompt();
@@ -87,6 +91,7 @@ function TypingGame() {
         }
     }, [data]);
 
+    // Calculate the WPM and accuracy when the user finishes typing the prompt
     useEffect(() => {
         if (endTime !== null) {
             const elapsedTime = (endTime - startTime) / 1000; // convert to seconds
@@ -96,13 +101,14 @@ function TypingGame() {
             const numCorrect = typingText.length - numIncorrect;
             const accuracy = Math.round((numCorrect / typingText.length) * 100);
             setAccuracy(accuracy);
-
+            // Add the score to the database
             addScore({
                 variables: { wpm: wpm },
             });
         }
     }, [endTime]);
 
+    // Update the elapsed time every second
     useEffect(() => {
         const interval = setInterval(() => {
             if (startTime !== null && endTime === null) {
@@ -114,6 +120,7 @@ function TypingGame() {
         return () => clearInterval(interval);
     }, [startTime, endTime]);
 
+    // Display the prompt with correct/incorrect characters highlighted
     const typedText = typingText.split('').map((char, index) => {
         let className = '';
 

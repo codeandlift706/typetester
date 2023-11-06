@@ -77,8 +77,8 @@ export const REMOVE_SCORE = gql`
 
 // Add a score by ID
 export const ADD_SCORE = gql`
-  mutation addScore($userId: ID!, $score: Int!) {
-    addScore(userId: $userId, score: $score) {
+  mutation addScore($wpm: Int!, $userId: ID!) {
+    addScore(wpm: $wpm, userId: $userId) {
       _id
       score
       user {
@@ -86,6 +86,7 @@ export const ADD_SCORE = gql`
         username
         firstName
         lastName
+        email
       }
     }
   }
