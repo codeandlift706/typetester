@@ -202,10 +202,6 @@ li {
   }
 }
 
-<<<<<<< HEAD
-.TypingGame {
-  color: #000000;
-=======
 @keyframes enlarge {
   from {
     width: 500px;
@@ -245,5 +241,4 @@ li {
 
 .hidden-div {
   animation: fade 2s forwards;
->>>>>>> bfc22ecf07e292b83e180b04e77b9998d6b5d213
 }

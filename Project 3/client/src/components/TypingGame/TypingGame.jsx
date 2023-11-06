@@ -136,15 +136,9 @@ function TypingGame() {
     }
 
     return (
-<<<<<<< HEAD
-        <div className="container TypingGame">
-            <div className="typing-text">{typedText}</div>
-            <input
-=======
         <div className="game-container">
             <div className="typing-text hidden-div">{typedText}</div>
             <textarea
->>>>>>> bfc22ecf07e292b83e180b04e77b9998d6b5d213
                 type="text"
                 className="input-field hidden-div"
                 value={userInput}
