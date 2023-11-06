@@ -1,5 +1,5 @@
 const { User, Score, Prompt } = require('../models');
-const { AuthenticationError } = require('../utils/auth');
+const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
