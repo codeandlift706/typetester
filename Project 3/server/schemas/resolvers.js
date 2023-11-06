@@ -11,7 +11,7 @@ const resolvers = {
             return User.findOne({ username }).populate('scores'); 
         },
 
-        scores: async (parent, { userId }) => { //REVIEW!!!
+        scores: async (parent, { userId }) => { 
             const params = userId ? { userId } : {};
             return Score.find(params).sort({ createdAt: -1 }).populate('user');
         },
@@ -54,7 +54,7 @@ const resolvers = {
         removeUser: async (parent, { userId }, context) => {
             if (context.user) {
                 await User.findOneAndDelete(
-                    { _id: userId }
+                    { user:context.user._id }
                 );
 
                 return;
@@ -96,14 +96,14 @@ const resolvers = {
         },
 
 
-        removeScore: async (parent, { score, userId }, context) => { //REVIEW!!!
+        removeScore: async (parent, { score }, context) => { //REVIEW!!!
             if (context.user) {
                 const score = await Score.findOneAndDelete({
-                    score: score,
+                    score: score._id,
                 });
 
                 await User.findOneAndUpdate(
-                    { _id: userId },
+                    { _id: context.user._id },
                     { $pull: { scores: score._id } }
                 );
 
