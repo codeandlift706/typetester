@@ -7,7 +7,7 @@ const  Prompt  = require('../models/Prompt');
 
         { text: "I just don't think this is that great for me. I don't want to do it. Like, I can't take the pressure of it." },
 
-        { text: "Somebody lied to her several times and told her that she was fly, hot and sexy and beautiful and she's nothing like that She's nothing of the sort" },
+        { text: "Somebody lied to her several times and told her that she was fly, hot and sexy and beautiful and she's nothing like that. She's nothing of the sort." },
 
         { text: "You know, you really don't need a forensics team to get to the bottom of this. If you guys were the inventors of Facebook, you'd have invented Facebook." },
 
@@ -34,7 +34,7 @@ const  Prompt  = require('../models/Prompt');
 
         { text: "The world is indeed full of peril, and in it there are many dark places; but still there is much that is fair, and though in all lands love is now mingled with grief, it grows perhaps the greater." },
 
-        { text: "I've seen things you people wouldn't believe. Attack ships on fire off the shoulder of Orion. I watched C-beams glitter in the dark near the Tannhäuser Gate. All those moments will be lost in time, like tears in rain. Time to die." },
+        { text: "I've seen things you people wouldn't believe. Attack ships on fire off the shoulder of Orion. I watched C-beams glitter in the dark near the Tannhauser Gate. All those moments will be lost in time, like tears in rain. Time to die." },
 
         { text: "Love is the one thing we're capable of perceiving that transcends dimensions of time and space." },
 
