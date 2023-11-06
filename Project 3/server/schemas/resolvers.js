@@ -8,7 +8,7 @@ const resolvers = {
         },
 
         user: async (parent, { username }) => { 
-            return User.findOne({ username }).populate('scores');
+            return User.findOne({ username }).populate('scores'); 
         },
 
         scores: async (parent, { userId }) => { //REVIEW!!!
