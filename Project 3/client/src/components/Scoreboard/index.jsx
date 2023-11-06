@@ -36,29 +36,36 @@ const Scoreboard = () => {
     for (let i = 0; i < scores.length; i++) {
         const score = scores[i].score;
         const username = scores[i].user.username;
-        console.log(`Score: ${score}, Username: ${username}`);
+        // console.log(`Score: ${score}, Username: ${username}`);
     }
 
     if (loading) {
         return <h3>LOADING...</h3>;
     }
 
-
     const scoreItems = scores.map((scoreObject) => {
         const score = scoreObject.score;
         const username = scoreObject.user.username;
         return (
-            <p key={score}>
-                Score: {score}, Username: {username}
-            </p>
+            <tr>
+                <td>{username}</td>
+                <td>{score}</td>
+            </tr>
         );
     });
 
     return (
-        <>
-            {scoreItems}
-        </>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>{scoreItems}</tbody>
+        </table>
     );
 };
+
 
 export default Scoreboard;
