@@ -5,6 +5,7 @@ import { ADD_USER } from '../../utils/mutations'
 
 function SignupForm(props) { //do we need props?
     const [formState, setFormState] = useState({ firstName: '', lastName: '', username: '', email: '', password: '' });
+    const [errorMessage, setErrorMessage] = useState('');
     const [addUser, { error }] = useMutation(ADD_USER);
 
     // useEffect(() => {
@@ -18,6 +19,14 @@ function SignupForm(props) { //do we need props?
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+
+        if (!isValidPassword(formState.password)) {
+            setErrorMessage('Invalid Password.'); // error message
+            console.log('Error message:', errorMessage); // Add this line
+            return;
+          }
+          setErrorMessage('');
+
         try {
             const { data } = await addUser({
                 variables: { ...formState},
@@ -46,12 +55,18 @@ function SignupForm(props) { //do we need props?
     };
 
 
+    const isValidPassword = (password) => {
+        return password.length >= 8;
+      };
+
     return (
         <div className="login-container">
             {/* <Link to="/login">← Go to Login</Link> */}
 
             <p className="title">signup</p>
             <form onSubmit={handleFormSubmit}>
+                                {/* Display error message for password */}
+      {errorMessage && <p style={{ color: 'red', marginBottom: '10px' }}>{errorMessage}</p>}
                 <div>
                     <label class="login-labels" htmlFor="firstName"><b>first name</b></label>
                     <div>
