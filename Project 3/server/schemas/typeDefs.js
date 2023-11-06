@@ -17,7 +17,7 @@ const typeDefs = `
     type Score {
         _id: ID
         score: Int
-        user(_id: ID!): User
+        user: User
         createdAt: String
     }
 
@@ -39,7 +39,7 @@ const typeDefs = `
         addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
         updateUser(username: String): User
         removeUser(userId: ID!): User
-        addScore(score: Int!): Score
+        addScore(wpm:Int): Score
         removeScore(userId: ID!, scoreId: ID!): Score
     }
 `;

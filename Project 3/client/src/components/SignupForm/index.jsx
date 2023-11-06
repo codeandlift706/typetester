@@ -5,6 +5,7 @@ import { ADD_USER } from '../../utils/mutations'
 
 function SignupForm(props) { //do we need props?
     const [formState, setFormState] = useState({ firstName: '', lastName: '', username: '', email: '', password: '' });
+    const [errorMessage, setErrorMessage] = useState('');
     const [addUser, { error }] = useMutation(ADD_USER);
 
     // useEffect(() => {
@@ -18,6 +19,14 @@ function SignupForm(props) { //do we need props?
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+
+        if (!isValidPassword(formState.password)) {
+            setErrorMessage('Invalid Password.'); // error message
+            console.log('Error message:', errorMessage); // Add this line
+            return;
+          }
+          setErrorMessage('');
+
         try {
             const { data } = await addUser({
                 variables: { ...formState},
@@ -46,14 +55,20 @@ function SignupForm(props) { //do we need props?
     };
 
 
+    const isValidPassword = (password) => {
+        return password.length >= 8;
+      };
+
     return (
         <div className="login-container">
             {/* <Link to="/login">← Go to Login</Link> */}
 
             <p className="title">signup</p>
             <form onSubmit={handleFormSubmit}>
+                                {/* Display error message for password */}
+      {errorMessage && <p style={{ color: 'red', marginBottom: '10px' }}>{errorMessage}</p>}
                 <div>
-                    <label htmlFor="firstName">First Name</label>
+                    <label class="login-labels" htmlFor="firstName"><b>first name</b></label>
                     <div>
                     <input
                         placeholder="first"
@@ -65,7 +80,7 @@ function SignupForm(props) { //do we need props?
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="lastName">Last Name</label>
+                    <label class="login-labels" htmlFor="lastName"><b>last name</b></label>
                     <div>
                     <input
                         placeholder="last"
@@ -77,7 +92,7 @@ function SignupForm(props) { //do we need props?
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="username">Username</label>
+                    <label class="login-labels" htmlFor="username"><b>username</b></label>
                     <div>
                     <input
                         placeholder="username"
@@ -89,7 +104,7 @@ function SignupForm(props) { //do we need props?
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="email">Email</label>
+                    <label class="login-labels" htmlFor="email"><b>email</b></label>
                     <div>
                     <input
                         placeholder="youremail@test.com"
@@ -101,7 +116,7 @@ function SignupForm(props) { //do we need props?
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="pwd">Password</label>
+                    <label class="login-labels" htmlFor="pwd"><b>password</b></label>
                     <div>
                     <input
                         placeholder="******"
@@ -113,7 +128,7 @@ function SignupForm(props) { //do we need props?
                     </div>
                 </div>
                 <div>
-                    <button className="begin-button" type="submit">submit</button>
+                    <button className="submit-button" type="submit">submit</button>
                 </div>
             </form>
         </div>
