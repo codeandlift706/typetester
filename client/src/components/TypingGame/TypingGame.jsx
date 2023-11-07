@@ -112,7 +112,7 @@ function TypingGame() {
                 setAccuracy(accuracy);
 
                 // Add the score to the database
-                const userId = user?._id;
+                // onst userId = user?._id;
 
                 addScore({
                     variables: { wpm: wpm },
