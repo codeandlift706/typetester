@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom';
-import StartBox from './components/StartBox';
 import {
   ApolloClient,
   InMemoryCache,
@@ -7,9 +6,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import TypingGame from './components/TypingGame/TypingGame'
 import { LoadingProvider } from './components/TypingGame/LoadingContext';
-import Home from './pages/Home'
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({

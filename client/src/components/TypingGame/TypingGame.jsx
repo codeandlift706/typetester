@@ -19,6 +19,7 @@ function TypingGame() {
     const [elapsedTime, setElapsedTime] = useState(0);
     const [accuracy, setAccuracy] = useState(null);
     const [numIncorrect, setNumIncorrect] = useState(0);
+    const [cheatingMessage, setCheatingMessage] = useState('');
     const inputRef = useRef(null);
 
     // Load a random prompt from the database
@@ -80,6 +81,7 @@ function TypingGame() {
         setElapsedTime(0);
         setAccuracy(null);
         setNumIncorrect(0);
+        setCheatingMessage('');
         loadPrompt();
         inputRef.current.focus();
     };
@@ -98,14 +100,24 @@ function TypingGame() {
             const elapsedTime = (endTime - startTime) / 1000; // convert to seconds
             const words = typingText.split(' ').length;
             const wpm = Math.round(words / (elapsedTime / 60));
-            setWpm(wpm);
-            const numCorrect = typingText.length - numIncorrect;
-            const accuracy = Math.round((numCorrect / typingText.length) * 100);
-            setAccuracy(accuracy);
-            // Add the score to the database
-            addScore({
-                variables: { wpm: wpm },
-            });
+
+            if (wpm === Infinity) {
+                setWpm(0);
+                setAccuracy(null);
+                setCheatingMessage('No cheating!');
+            } else {
+                setWpm(wpm);
+                const numCorrect = typingText.length - numIncorrect;
+                const accuracy = Math.round((numCorrect / typingText.length) * 100);
+                setAccuracy(accuracy);
+
+                // Add the score to the database
+                const userId = user?._id;
+
+                addScore({
+                    variables: { wpm: wpm },
+                });
+            }
         }
     }, [endTime]);
 
@@ -144,27 +156,34 @@ function TypingGame() {
 
     return (
         <div className="game-container">
-            <div className="typing-text hidden-div">{typedText}</div>
-            <textarea
-                type="text"
-                className="input-field hidden-div"
-                value={userInput}
-                onChange={handleInputChange} // call handleInputChange when the input field changes
-                ref={inputRef}
-            />
-            {endTime !== null && (
-                <div className="stats">
-                    <div className="stat">
-                        Time: {elapsedTime} s
-                    </div>
-                    <div className="stat">
-                        WPM: {wpm}
-                    </div>
-                    <div className="stat">
-                        Accuracy: {accuracy}%
-                    </div>
-                </div>
+            {cheatingMessage !== '' ? (
+                <p>{cheatingMessage}</p>
+            ) : (
+                <>
+                    <div className="typing-text hidden-div">{typedText}</div>
+                    <textarea
+                        type="text"
+                        className="input-field hidden-div"
+                        value={userInput}
+                        onChange={handleInputChange} // call handleInputChange when the input field changes
+                        ref={inputRef}
+                    />
+                    {endTime !== null && (
+                        <div className="stats">
+                            <div className="stat">
+                                Time: {elapsedTime} s
+                            </div>
+                            <div className="stat">
+                                WPM: {wpm}
+                            </div>
+                            <div className="stat">
+                                Accuracy: {accuracy}%
+                            </div>
+                        </div>
+                    )}
+                </>
             )}
+
             <button class="reset-button hidden-div" onClick={handleReset}>reset</button>
             <Link to="/">
                 <li class="mx-1" onClick={backButtonClick}>home</li>
