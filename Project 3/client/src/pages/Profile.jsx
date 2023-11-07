@@ -170,13 +170,13 @@ const { data} = await removeUser({
                 </div>
 
               </form>
-
-              <h3>Delete Your Account</h3>
+              <div class="bottom-space" />
+              <li><b>delete your account</b></li>
               <form onSubmit={handleRemoveUserFormSubmit}>
                 <div>
 
-                  <label
-                    htmlFor="username">Email:</label>
+                <li class="mx-1"
+                    htmlFor="username">email</li>
                   <input
                     placeholder="youremail@test.com"
                     name="email"
@@ -197,7 +197,7 @@ const { data} = await removeUser({
                 </div>
 
                 <div>
-                  <button type="submit">Delete</button>
+                  <button class="submit-button" type="submit">delete</button>
                 </div>
 
               </form>

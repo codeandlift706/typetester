@@ -8,13 +8,19 @@ function NavBar() {
     function showNavigation() {
         if (Auth.loggedIn()) {
             return (
-                <div className="flex-row">
+                <div className="account-buttons flex-row">
                     {!isHomepage && <li className="mx-1"><Link to="/">homepage</Link></li>}
                     {!isProfile && <li className="mx-1"><Link to="/profile/me">profile</Link></li>}
+                    
                     <li className="mx-1">
                         <a href="/" onClick={() => Auth.logout()}>
                             logout
                         </a>
+                    </li>
+                    <li>
+                        <Link to="/score">
+                            scoreboard
+                        </Link>
                     </li>
                 </div>
             );

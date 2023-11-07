@@ -56,8 +56,8 @@ const Scoreboard = () => {
         <table>
           <thead>
             <tr>
-              <th>Username</th>
-              <th>Score (WPM)</th>
+              <th>username |</th>
+              <th>score (wpm)</th>
             </tr>
           </thead>
           <tbody>{scoreItems}</tbody>
