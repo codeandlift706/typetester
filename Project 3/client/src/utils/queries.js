@@ -45,6 +45,10 @@ export const QUERY_SCORES = gql`
         firstName
         lastName
         email
+        scores {
+          _id
+          score
+        }
       }
     }
   }
@@ -57,7 +61,8 @@ export const QUERY_PROMPTS = gql`
       text
     }
   }
-`; 
+`;
+
 export const QUERY_ME = gql`
   query me {
     me {
