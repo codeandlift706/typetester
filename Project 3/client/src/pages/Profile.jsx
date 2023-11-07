@@ -93,25 +93,25 @@ const Profile = () => {
 
   return (
     <div className="user-settings-container">
-      <NavBar />
       <div>
         <p>
-          Logged in as: {user.username}
+          logged in as: {user.username}
         </p>
 
         <div>
           <h2>
-            Welcome to {userParam ? `${user.username}'s` : 'your'} profile!
+            welcome to {userParam ? `${user.username}'s` : 'your'} profile!
           </h2>
 
           {showUsernameUpdateForm && (
             <>
-              <h3>Update Your Username</h3>
+              <h3>update your username</h3>
               <form onSubmit={handleUpdateUserFormSubmit}>
                 <div>
-
-                  <label
-                    htmlFor="username">Username:</label>
+<div>
+                  <label className="login-labels"
+                    htmlFor="username"><b>username</b></label>
+                    </div>
                   <input
                     placeholder="username"
                     name="username"
@@ -121,14 +121,14 @@ const Profile = () => {
                   />
                 </div>
                 <div>
-                  <button type="submit">Update</button>
+                  <button className="submit-button" type="submit">update</button>
                 </div>
               </form>
             </>
           )}
 
-          <button onClick={() => setShowUsernameUpdateForm(!showUsernameUpdateForm)}>
-            {showUsernameUpdateForm ? 'Close User Settings' : 'User Settings'}
+          <button class="submit-button" onClick={() => setShowUsernameUpdateForm(!showUsernameUpdateForm)}>
+            {showUsernameUpdateForm ? 'close user settings' : 'user settings'}
           </button>
 
           <h2>
