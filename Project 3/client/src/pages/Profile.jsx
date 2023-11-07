@@ -153,20 +153,20 @@ const { data} = await removeUser({
             <>
               <form onSubmit={handleUpdateUserFormSubmit}>
                 <div>
-
-                  <label
-                    htmlFor="username">Username:</label>
-                  <input
-                    placeholder="username"
-                    name="username"
-                    type="username"
-                    id="username"
-                    onChange={handleUsernameChange}
-                  />
+                  <li><b>update your username</b></li>
+                  <li class="mx-1"
+                    htmlFor="username">username</li>
+                  <div>
+                    <input
+                      name="username"
+                      type="username"
+                      id="username"
+                      onChange={handleUsernameChange}
+                    />
+                  </div>
                 </div>
-
                 <div>
-                  <button type="submit">Update</button>
+                  <button class="submit-button" type="submit">update</button>
                 </div>
 
               </form>
