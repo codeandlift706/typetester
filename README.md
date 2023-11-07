@@ -48,4 +48,4 @@ Type Tester is a typing game that draws inspiration from Type Racer (https://pla
 - Bliss Oros: https://github.com/kybliss
 
 ## Deployed Link
-
+https://typetester.onrender.com/
