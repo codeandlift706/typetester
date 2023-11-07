@@ -156,37 +156,34 @@ function TypingGame() {
 
     return (
         <div className="game-container">
-          {cheatingMessage !== '' ? (
-            <p>{cheatingMessage}</p>
-          ) : (
-            <>
-              <div className="typing-text hidden-div">{typedText}</div>
-              <textarea
-                type="text"
-                className="input-field hidden-div"
-                value={userInput}
-                onChange={handleInputChange} // call handleInputChange when the input field changes
-                ref={inputRef}
-              />
-              {endTime !== null && (
-                <div className="stats">
-                  <div className="stat">
-                    Time: {elapsedTime} s
-                  </div>
-                  <div className="stat">
-                    WPM: {wpm}
-                  </div>
-                  <div className="stat">
-                    Accuracy: {accuracy}%
-                  </div>
-                </div>
-<<<<<<< HEAD
-              )}
-            </>
-          )}
-          <button class="reset-button hidden-div" onClick={handleReset}>reset</button>
-=======
+            {cheatingMessage !== '' ? (
+                <p>{cheatingMessage}</p>
+            ) : (
+                <>
+                    <div className="typing-text hidden-div">{typedText}</div>
+                    <textarea
+                        type="text"
+                        className="input-field hidden-div"
+                        value={userInput}
+                        onChange={handleInputChange} // call handleInputChange when the input field changes
+                        ref={inputRef}
+                    />
+                    {endTime !== null && (
+                        <div className="stats">
+                            <div className="stat">
+                                Time: {elapsedTime} s
+                            </div>
+                            <div className="stat">
+                                WPM: {wpm}
+                            </div>
+                            <div className="stat">
+                                Accuracy: {accuracy}%
+                            </div>
+                        </div>
+                    )}
+                </>
             )}
+
             <button class="reset-button hidden-div" onClick={handleReset}>reset</button>
             <Link to="/">
                 <li class="mx-1" onClick={backButtonClick}>home</li>
@@ -194,9 +191,8 @@ function TypingGame() {
             <Link to="/score">
                 <li class="mx-1 bottom-space" onClick={scoreboardButtonClick}>scoreboard</li>
             </Link>
->>>>>>> 8744c191fde816afda94102f9a87dfacd4d0a986
         </div>
-      );
+    );
 }
 
 export default TypingGame;
