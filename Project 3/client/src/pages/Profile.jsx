@@ -26,7 +26,7 @@ const Profile = () => {
   // console.log(user.username); //shows the current username
   const canUpdateUsername = userParam === user.id; //shows on profile page if you can update username
 
-  
+
   //collect user input
   const handleUsernameChange = (event) => {
     const { name, value } = event.target;
@@ -105,13 +105,12 @@ const Profile = () => {
 
           {showUsernameUpdateForm && (
             <>
-              <h3>update your username</h3>
+              <h3>Update Your Username</h3>
               <form onSubmit={handleUpdateUserFormSubmit}>
                 <div>
-<div>
-                  <label className="login-labels"
-                    htmlFor="username"><b>username</b></label>
-                    </div>
+
+                  <label
+                    htmlFor="username">Username:</label>
                   <input
                     placeholder="username"
                     name="username"
@@ -121,15 +120,19 @@ const Profile = () => {
                   />
                 </div>
                 <div>
-                  <button className="submit-button" type="submit">update</button>
+                  <button type="submit">Update</button>
                 </div>
               </form>
             </>
           )}
 
-          <button class="submit-button" onClick={() => setShowUsernameUpdateForm(!showUsernameUpdateForm)}>
-            {showUsernameUpdateForm ? 'close user settings' : 'user settings'}
+          <button onClick={() => setShowUsernameUpdateForm(!showUsernameUpdateForm)}>
+            {showUsernameUpdateForm ? 'Close User Settings' : 'User Settings'}
           </button>
+
+          <h2>
+            {user.scores?.length > 0 && <Scoreboard scores={user.scores} />}
+          </h2>
 
         </div>
       </div>

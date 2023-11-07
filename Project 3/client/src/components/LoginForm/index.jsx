@@ -45,6 +45,9 @@ function LoginForm(props) { //do we need props?
         });
     };
 
+    const backButtonClick = (event) => {
+    };
+
     return (
         <div class="login-container">
             {/* <Link to="/signup">← Go to Signup</Link> */}
@@ -82,7 +85,7 @@ function LoginForm(props) { //do we need props?
                 <div>
                     <button class="submit-button" type="submit">submit</button>
                 </div>
-            </form>
+            </form> 
         </div>
     );
 }

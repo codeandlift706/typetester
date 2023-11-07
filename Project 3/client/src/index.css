@@ -313,3 +313,7 @@ li {
   animation: shrink 1s forwards;
   overflow: auto;
 }
+
+.bottom-space {
+  margin-bottom: 10px;
+}
