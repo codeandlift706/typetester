@@ -21,6 +21,9 @@ const Profile = () => {
 
   const [updateUser, { error }] = useMutation(UPDATE_USER);
 
+  const backButtonClick = (event) => {
+  };
+
   const user = data?.me || {}; //check if data has user property
   // console.log(user); //shows the user's info as an object
   // console.log(user.username); //shows the current username
@@ -92,48 +95,42 @@ const Profile = () => {
   }
 
   return (
-    <div className="user-settings-container">
+    <div>
       <div>
-        <p>
-          logged in as: {user.username}
-        </p>
-
-        <div>
-          <h2>
+        <div className="user-settings-container">
+          <li>
             welcome to {userParam ? `${user.username}'s` : 'your'} profile!
-          </h2>
+          </li>
+          <li class="bottom-space">
+            logged in as: {user.username}
+          </li>
 
           {showUsernameUpdateForm && (
             <>
-              <h3>Update Your Username</h3>
               <form onSubmit={handleUpdateUserFormSubmit}>
                 <div>
-
-                  <label
-                    htmlFor="username">Username:</label>
-                  <input
-                    placeholder="username"
-                    name="username"
-                    type="username"
-                    id="username"
-                    onChange={handleUsernameChange}
-                  />
+                  <li><b>update your username</b></li>
+                  <li class="mx-1"
+                    htmlFor="username">username</li>
+                  <div>
+                    <input
+                      name="username"
+                      type="username"
+                      id="username"
+                      onChange={handleUsernameChange}
+                    />
+                  </div>
                 </div>
                 <div>
-                  <button type="submit">Update</button>
+                  <button class="submit-button" type="submit">update</button>
                 </div>
               </form>
             </>
           )}
 
-          <button onClick={() => setShowUsernameUpdateForm(!showUsernameUpdateForm)}>
-            {showUsernameUpdateForm ? 'Close User Settings' : 'User Settings'}
+          <button class="submit-button" onClick={() => setShowUsernameUpdateForm(!showUsernameUpdateForm)}>
+            {showUsernameUpdateForm ? 'close user settings' : 'user settings'}
           </button>
-
-          <h2>
-            {user.scores?.length > 0 && <Scoreboard scores={user.scores} />}
-          </h2>
-
         </div>
       </div>
     </div>

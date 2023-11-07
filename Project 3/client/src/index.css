@@ -158,6 +158,8 @@ li {
   background-color: var(--background-color);
   color: black;
   margin-top: 10px;
+  flex-direction: column;
+  position: relative;
 }
 
 .reset-button {
