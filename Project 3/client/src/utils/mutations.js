@@ -60,8 +60,8 @@ export const UPDATE_USER = gql`
 
 // Remove a user by ID
 export const REMOVE_USER = gql`
-  mutation removeUser($userId: ID!) {
-    removeUser(userId: $id) {
+  mutation removeUser($email: String!, $password: String!) {
+    removeUser(email: $email, password: $password) {
       _id
       username
       firstName

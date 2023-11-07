@@ -6,7 +6,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
-import { UPDATE_USER } from '../utils/mutations';
+import { UPDATE_USER, REMOVE_USER } from '../utils/mutations';
 
 const Profile = () => {
 
@@ -17,16 +17,20 @@ const Profile = () => {
   });
 
   const [userFormState, setUserFormState] = useState({ username: '' })
+  const [formState, setFormState] = useState({ email: '', password: '' })
+
   const [showUsernameUpdateForm, setShowUsernameUpdateForm] = useState(false); //show "User Settings" button
 
   const [updateUser, { error }] = useMutation(UPDATE_USER);
 
+  const [removeUser, { error2 }] = useMutation(REMOVE_USER);
+
   const user = data?.me || {}; //check if data has user property
   // console.log(user); //shows the user's info as an object
   // console.log(user.username); //shows the current username
-  const canUpdateUsername = userParam === user.id; //shows on profile page if you can update username
+  // const canUpdateUsername = userParam === user.id; //shows on profile page if you can update username
 
-  
+
   //collect user input
   const handleUsernameChange = (event) => {
     const { name, value } = event.target;
@@ -78,6 +82,45 @@ const Profile = () => {
     });
   };
 
+
+
+  const handleRemoveUserFormSubmit = async (event) => {
+    event.preventDefault();
+
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+
+    try {
+const { data} = await removeUser({
+        variables: {
+          ...formState
+        },
+      });
+
+      
+    } catch (err) {
+      console.error(err);
+    }
+    
+    
+    return <Navigate to="/" />;
+  };
+
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+        ...formState,
+        [name]: value,
+    });
+
+    // return <Navigate to="/" />;
+    };
+
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -90,6 +133,10 @@ const Profile = () => {
       </h4>
     );
   }
+
+  // if (!Auth.loggedIn()) {
+  //   return <Navigate to="/" />;
+  // };
 
   return (
     <>
@@ -120,10 +167,47 @@ const Profile = () => {
                     onChange={handleUsernameChange}
                   />
                 </div>
+
                 <div>
                   <button type="submit">Update</button>
                 </div>
+
               </form>
+
+              <h3>Delete Your Account</h3>
+              <form onSubmit={handleRemoveUserFormSubmit}>
+                <div>
+
+                  <label
+                    htmlFor="username">Email:</label>
+                  <input
+                    placeholder="youremail@test.com"
+                    name="email"
+                    type="email"
+                    id="email"
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div>
+                  <input
+                    placeholder="******"
+                    name="password"
+                    type="password"
+                    id="pwd"
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div>
+                  <button type="submit">Delete</button>
+                </div>
+
+              </form>
+
+
+
+
             </>
           )}
 

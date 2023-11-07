@@ -51,10 +51,10 @@ const resolvers = {
             return { token, user };
         },
 
-        removeUser: async (parent, { userId }, context) => {
+        removeUser: async (parent, args, context) => {
             if (context.user) {
                 await User.findOneAndDelete(
-                    { user:context.user._id }
+                    { _id: context.user._id }
                 );
 
                 return;
