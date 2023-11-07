@@ -111,7 +111,6 @@ function TypingGame() {
                 const accuracy = Math.round((numCorrect / typingText.length) * 100);
                 setAccuracy(accuracy);
 
-
                 addScore({
                     variables: { wpm: wpm },
                 });
