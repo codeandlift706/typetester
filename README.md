@@ -18,7 +18,26 @@ Type Tester is a typing game that draws inspiration from Type Racer (https://pla
 5. Run 'npm run develop' to concurrently launch client side and server side servers.
 
 ## Usage
-*Screenshots will go here*
+- Homepage
+![Screenshot 2023-11-07 at 11 30 33 AM](https://github.com/codeandlift706/typetester/assets/141271179/45f13291-9332-4cf4-9362-2b59996109f5)
+
+
+- Signup Form
+![Screenshot 2023-11-07 at 11 30 56 AM](https://github.com/codeandlift706/typetester/assets/141271179/325577a2-225d-410d-ade8-c731f43039b0)
+
+- Login Form
+![Screenshot 2023-11-07 at 11 31 12 AM](https://github.com/codeandlift706/typetester/assets/141271179/74e1ef4e-69d5-4259-bc41-f37d1660d653)
+
+- Game Play pt 1
+![Screenshot 2023-11-07 at 11 32 48 AM](https://github.com/codeandlift706/typetester/assets/141271179/617ac687-6b86-4f46-81f4-75f1ea41e277)
+
+- Game Play pt 2
+![Screenshot 2023-11-07 at 11 33 26 AM](https://github.com/codeandlift706/typetester/assets/141271179/44326cc6-4cc7-4f1f-bef9-10c6263d6aaf)
+
+- Scoreboard
+![Screenshot 2023-11-07 at 11 34 11 AM](https://github.com/codeandlift706/typetester/assets/141271179/3a290153-8718-497e-b21f-ea0c6aadec14)
+
+  
 
 ## Technologies Used
 - Client Side
@@ -48,4 +67,4 @@ Type Tester is a typing game that draws inspiration from Type Racer (https://pla
 - Bliss Oros: https://github.com/kybliss
 
 ## Deployed Link
-
+https://typetester.onrender.com/
