@@ -8,15 +8,15 @@ function NavBar() {
     function showNavigation() {
         if (Auth.loggedIn()) {
             return (
-                <ul className="flex-row">
-                    {!isHomepage && <li className="mx-1"><Link to="/">Homepage</Link></li>}
-                    {!isProfile && <li className="mx-1"><Link to="/profile/me">Profile</Link></li>}
+                <div className="flex-row">
+                    {!isHomepage && <li className="mx-1"><Link to="/">homepage</Link></li>}
+                    {!isProfile && <li className="mx-1"><Link to="/profile/me">profile</Link></li>}
                     <li className="mx-1">
                         <a href="/" onClick={() => Auth.logout()}>
-                            Logout
+                            logout
                         </a>
                     </li>
-                </ul>
+                </div>
             );
         } else {
             return (

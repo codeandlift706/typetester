@@ -12,6 +12,10 @@ export const ADD_USER = gql`
         lastName
         username
         email
+        scores {
+          _id
+          score
+        }
       }
     }
   }
@@ -28,12 +32,16 @@ export const LOGIN = gql`
         lastName
         username
         email
+        scores {
+          _id
+          score
+        }
       }
     }
   }
 `;
 
-// Update a user by ID
+// Update a user with new username
 export const UPDATE_USER = gql`
   mutation updateUser($username: String) {
     updateUser(username: $username) {
@@ -42,19 +50,27 @@ export const UPDATE_USER = gql`
       firstName
       lastName
       email
+      scores {
+        _id
+        score
+      }
     }
   }
 `;
 
-// Remove a user by ID
+// Remove a user by email and password
 export const REMOVE_USER = gql`
-  mutation removeUser($userId: ID!) {
-    removeUser(userId: $id) {
+  mutation removeUser($email: String!, $password: String!) {
+    removeUser(email: $email, password: $password) {
       _id
       username
       firstName
       lastName
       email
+      scores {
+        _id
+        score
+      }
     }
   }
 `;
@@ -70,6 +86,11 @@ export const REMOVE_SCORE = gql`
         username
         firstName
         lastName
+        email
+        scores {
+          _id
+          score
+        }
       }
     }
   }

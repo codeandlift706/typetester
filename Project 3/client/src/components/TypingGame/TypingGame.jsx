@@ -4,6 +4,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_PROMPTS } from '../../utils/queries';
 import { ADD_SCORE } from '../../utils/mutations';
 import { LoadingContext } from './LoadingContext';
+import { Link } from "react-router-dom";
 
 function TypingGame() {
     const { loading } = useContext(LoadingContext);
@@ -143,6 +144,12 @@ function TypingGame() {
         return <span key={index} className={className}>{char}</span>;
     });
 
+    const scoreboardButtonClick = (event) => {
+    };
+
+    const backButtonClick = (event) => {
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -173,10 +180,21 @@ function TypingGame() {
                     Accuracy: {accuracy}%
                   </div>
                 </div>
+<<<<<<< HEAD
               )}
             </>
           )}
           <button class="reset-button hidden-div" onClick={handleReset}>reset</button>
+=======
+            )}
+            <button class="reset-button hidden-div" onClick={handleReset}>reset</button>
+            <Link to="/">
+                <li class="mx-1" onClick={backButtonClick}>home</li>
+            </Link>
+            <Link to="/score">
+                <li class="mx-1 bottom-space" onClick={scoreboardButtonClick}>scoreboard</li>
+            </Link>
+>>>>>>> 8744c191fde816afda94102f9a87dfacd4d0a986
         </div>
       );
 }
