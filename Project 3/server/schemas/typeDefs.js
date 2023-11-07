@@ -27,7 +27,6 @@ const typeDefs = `
     }
 
     type Query { 
-        users: [User]
         user(username: String!): User
         scores: [Score]
         prompts: [Prompt]
@@ -38,7 +37,7 @@ const typeDefs = `
         login(email: String!, password: String!): Auth
         addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
         updateUser(username: String): User
-        removeUser(userId: ID!): User
+        removeUser(email: String!, password: String!): User
         addScore(wpm:Int): Score
         removeScore(userId: ID!, scoreId: ID!): Score
     }

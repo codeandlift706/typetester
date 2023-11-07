@@ -7,8 +7,6 @@ const  Prompt  = require('../models/Prompt');
 
         { text: "I just don't think this is that great for me. I don't want to do it. Like, I can't take the pressure of it." },
 
-        { text: "Somebody lied to her several times and told her that she was fly, hot and sexy and beautiful and she's nothing like that. She's nothing of the sort." },
-
         { text: "You know, you really don't need a forensics team to get to the bottom of this. If you guys were the inventors of Facebook, you'd have invented Facebook." },
 
         { text: "You know, not everybody like onions. What about cake? Everybody loves cake! Cakes have layers." },
