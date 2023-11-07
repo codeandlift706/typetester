@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 
-import { QUERY_SCORES, QUERY_USERS } from '../../utils/queries';
+import { QUERY_SCORES } from '../../utils/queries';
 import { REMOVE_SCORE } from '../../utils/mutations';
 
 
@@ -33,29 +33,38 @@ const Scoreboard = () => {
         return <h3>LOADING...</h3>;
     }
 
-    const scoreItems = scores.map((scoreArray) => { //map over each score in the score array
-        const score = scoreArray.score; //grab the score from the score array
-        const username = scoreArray.user.username; //grab the username from the score array
-        return (
-            // render each pair as data in a table row
-            <tr> 
-                <td>{username}</td>
-                <td>{score}</td>
+    const scoreItems = scores.map((scoreArray) => {
+        const score = scoreArray.score;
+        const username = scoreArray.user?.username || [];
+      
+        // Check if username is not null before rendering it
+        if (username !== null) {
+          return (
+            // Render each pair as data in a table row
+            <tr>
+              <td>{username}</td>
+              <td>{score}</td>
             </tr>
-        );
-    });
-
-    return (
+          );
+        } else {
+          // Don't render anything if username is null
+          return null;
+        }
+      });
+      
+      return (
         <table>
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Score (WPM)</th>
-                </tr>
-            </thead>
-            <tbody>{scoreItems}</tbody>
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Score (WPM)</th>
+            </tr>
+          </thead>
+          <tbody>{scoreItems}</tbody>
         </table>
-    );
+      );
+
+    
 };
 
 

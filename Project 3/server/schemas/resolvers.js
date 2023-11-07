@@ -3,10 +3,6 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        users: async () => {
-            return User.find().populate('scores');
-        },
-
         user: async (parent, { username }) => { 
             return User.findOne({ username }).populate('scores'); 
         },
@@ -56,6 +52,8 @@ const resolvers = {
                 await User.findOneAndDelete(
                     { _id: context.user._id }
                 );
+
+                await Score.deleteMany({ user: context.user._id });
 
                 return;
             }

@@ -27,7 +27,6 @@ const typeDefs = `
     }
 
     type Query { 
-        users: [User]
         user(username: String!): User
         scores: [Score]
         prompts: [Prompt]

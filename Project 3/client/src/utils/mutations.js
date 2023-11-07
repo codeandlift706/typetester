@@ -41,7 +41,7 @@ export const LOGIN = gql`
   }
 `;
 
-// Update a user by ID
+// Update a user with new username
 export const UPDATE_USER = gql`
   mutation updateUser($username: String) {
     updateUser(username: $username) {
@@ -58,7 +58,7 @@ export const UPDATE_USER = gql`
   }
 `;
 
-// Remove a user by ID
+// Remove a user by email and password
 export const REMOVE_USER = gql`
   mutation removeUser($email: String!, $password: String!) {
     removeUser(email: $email, password: $password) {

@@ -7,6 +7,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 import { UPDATE_USER, REMOVE_USER } from '../utils/mutations';
+import { Link } from "react-router-dom";
 
 const Profile = () => {
 
@@ -28,7 +29,7 @@ const Profile = () => {
   const user = data?.me || {}; //check if data has user property
   // console.log(user); //shows the user's info as an object
   // console.log(user.username); //shows the current username
-  // const canUpdateUsername = userParam === user.id; //shows on profile page if you can update username
+
 
 
   //collect user input
@@ -105,7 +106,8 @@ const { data} = await removeUser({
       console.error(err);
     }
     
-    
+    Auth.logout();
+
     return <Navigate to="/" />;
   };
 
@@ -117,7 +119,7 @@ const { data} = await removeUser({
         [name]: value,
     });
 
-    // return <Navigate to="/" />;
+    return <Navigate to="/" />;
     };
 
 
@@ -125,18 +127,16 @@ const { data} = await removeUser({
     return <div>Loading...</div>;
   }
 
+
   if (!user?.username) {
     return (
       <h4>
-        You need to be logged in to see this. Use the navigation links above to
+        You need to be logged in to see this. Go back to <Link to="/">Home</Link> to
         sign up or log in!
       </h4>
     );
   }
 
-  // if (!Auth.loggedIn()) {
-  //   return <Navigate to="/" />;
-  // };
 
   return (
     <>

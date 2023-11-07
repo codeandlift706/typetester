@@ -28,15 +28,11 @@ function LoginForm(props) {
         });
 
 
-        // setUserFormData({ //reset the fields
-        //     email: '',
-        //     password: '',
-        // });
+
     };
 
     return (
         <div class="login-container">
-            {/* <Link to="/signup">← Go to Signup</Link> */}
             <p class="title">login</p>
             <form onSubmit={handleFormSubmit}>
                 <div>
