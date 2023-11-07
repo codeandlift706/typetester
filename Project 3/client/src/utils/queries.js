@@ -1,20 +1,4 @@
 import { gql } from '@apollo/client';
-// Get all users
-export const QUERY_USERS =gql `
-  query {
-    users {
-      _id
-      username
-      firstName
-      lastName
-      email
-      scores {
-      _id
-      score
-      }
-    }
-  }
-`;
 
 // Get a single user by their username
 export const QUERY_USER = gql`
@@ -54,6 +38,7 @@ export const QUERY_SCORES = gql`
   }
 `;
 
+// Get all prompts
 export const QUERY_PROMPTS = gql`
   query {
     prompts {
@@ -63,6 +48,7 @@ export const QUERY_PROMPTS = gql`
   }
 `;
 
+// Get logged in user info
 export const QUERY_ME = gql`
   query me {
     me {
