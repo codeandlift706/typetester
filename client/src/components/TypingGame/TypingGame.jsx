@@ -111,9 +111,6 @@ function TypingGame() {
                 const accuracy = Math.round((numCorrect / typingText.length) * 100);
                 setAccuracy(accuracy);
 
-                // Add the score to the database
-                // onst userId = user?._id;
-
                 addScore({
                     variables: { wpm: wpm },
                 });
