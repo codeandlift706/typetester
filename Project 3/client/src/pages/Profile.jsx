@@ -139,37 +139,34 @@ const { data} = await removeUser({
 
 
   return (
-    <>
-      <NavBar />
+    <div>
       <div>
-        <p>
-          Logged in as: {user.username}
-        </p>
-
         <div className="user-settings-container">
-          <h2>
-            Welcome to {userParam ? `${user.username}'s` : 'your'} profile!
-          </h2>
+          <li>
+            welcome to {userParam ? `${user.username}'s` : 'your'} profile!
+          </li>
+          <li class="bottom-space">
+            logged in as: {user.username}
+          </li>
 
           {showUsernameUpdateForm && (
             <>
-              <h3>Update Your Username</h3>
               <form onSubmit={handleUpdateUserFormSubmit}>
                 <div>
-
-                  <label
-                    htmlFor="username">Username:</label>
-                  <input
-                    placeholder="username"
-                    name="username"
-                    type="username"
-                    id="username"
-                    onChange={handleUsernameChange}
-                  />
+                  <li><b>update your username</b></li>
+                  <li class="mx-1"
+                    htmlFor="username">username</li>
+                  <div>
+                    <input
+                      name="username"
+                      type="username"
+                      id="username"
+                      onChange={handleUsernameChange}
+                    />
+                  </div>
                 </div>
-
                 <div>
-                  <button type="submit">Update</button>
+                  <button class="submit-button" type="submit">update</button>
                 </div>
 
               </form>
@@ -211,14 +208,12 @@ const { data} = await removeUser({
             </>
           )}
 
-          <button onClick={() => setShowUsernameUpdateForm(!showUsernameUpdateForm)}>
-            {showUsernameUpdateForm ? 'Close User Settings' : 'User Settings'}
+          <button class="submit-button" onClick={() => setShowUsernameUpdateForm(!showUsernameUpdateForm)}>
+            {showUsernameUpdateForm ? 'close user settings' : 'user settings'}
           </button>
-
         </div>
       </div>
-      <Footer />
-    </>
+    </div>
   );
 };
 

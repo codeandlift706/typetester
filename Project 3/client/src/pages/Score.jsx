@@ -5,12 +5,9 @@ import Header from "../components/Header";
 
 const Score = () => {
   return (
-    <>
-      <Header />
-      <NavBar />
+    <div className="score-container">
       <Scoreboard />
-      <Footer />
-    </>
+    </div>
   );
 };
 

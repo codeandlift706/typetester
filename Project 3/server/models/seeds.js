@@ -32,13 +32,27 @@ const  Prompt  = require('../models/Prompt');
 
         { text: "The world is indeed full of peril, and in it there are many dark places; but still there is much that is fair, and though in all lands love is now mingled with grief, it grows perhaps the greater." },
 
-        { text: "I've seen things you people wouldn't believe. Attack ships on fire off the shoulder of Orion. I watched C-beams glitter in the dark near the Tannhäuser Gate. All those moments will be lost in time, like tears in rain. Time to die." },
+        { text: "I've seen things you people wouldn't believe. Attack ships on fire off the shoulder of Orion. I watched C-beams glitter in the dark near the Tannhauser Gate. All those moments will be lost in time, like tears in rain. Time to die." },
 
         { text: "Love is the one thing we're capable of perceiving that transcends dimensions of time and space." },
 
         { text: "What is the most resilient parasite? Bacteria? A virus? An intestinal worm? An idea. Resilient... highly contagious. Once an idea has taken hold of the brain, it's almost impossible to eradicate." },
 
-        { text: "You are not your job, you're not how much money you have in the bank. You are not the car you drive. You're not the contents of your wallet." }//more quotes here
+        { text: "You are not your job, you're not how much money you have in the bank. You are not the car you drive. You're not the contents of your wallet." },
+        
+        { text: "I'm the guy who tells you that there are guys you can hit, and guys you can't. Now, that's not quite a guy you can't hit, but he's almost a guy you can't hit. So I'm gonna make a ruling on this right now: you don't hit him." },
+        
+        { text: "We always called each other good fellas. Like you'd say to somebody, 'You're gonna like this guy. He's all right, he's a good fellas. One of us." },
+
+        { text: "To my wife and all my sweethearts. May they never meet." },
+
+        { text: "The man who pulls the lever that breaks your neck will be a dispassionate man, and that dispassion is the very essence of justice." },
+
+        { text: "I know this is a silly question before I ask it, but can you Americans speak any other language besides English?" },
+
+        { text: "Normally I would say 'Auf Wiedersehen.' But that actually means 'until I see you again,' and because I never wish to see you again, to you sir I say 'goodbye.'" },
+
+        //more quotes here
     ];
     const insertedPrompts = await Prompt.insertMany(newPrompts);
     console.log(`Inserted ${insertedPrompts.length} new prompts.`);

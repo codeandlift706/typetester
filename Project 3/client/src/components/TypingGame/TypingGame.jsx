@@ -135,6 +135,8 @@ function TypingGame() {
     const scoreboardButtonClick = (event) => {
     };
 
+    const backButtonClick = (event) => {
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -164,10 +166,12 @@ function TypingGame() {
                 </div>
             )}
             <button class="reset-button hidden-div" onClick={handleReset}>reset</button>
-            <Link to="/score">
-                <button class="begin-button" onClick={scoreboardButtonClick}>scoreboard</button>
+            <Link to="/">
+                <li class="mx-1" onClick={backButtonClick}>home</li>
             </Link>
-
+            <Link to="/score">
+                <li class="mx-1 bottom-space" onClick={scoreboardButtonClick}>scoreboard</li>
+            </Link>
         </div>
     );
 }

@@ -31,6 +31,9 @@ function LoginForm(props) {
 
     };
 
+    const backButtonClick = (event) => {
+    };
+
     return (
         <div class="login-container">
             <p class="title">login</p>
@@ -67,7 +70,7 @@ function LoginForm(props) {
                 <div>
                     <button class="submit-button" type="submit">submit</button>
                 </div>
-            </form>
+            </form> 
         </div>
     );
 }

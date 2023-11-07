@@ -60,7 +60,7 @@ function SignupForm(props) { //do we need props?
       };
 
     return (
-        <div className="login-container">
+        <div className="signup-container">
             {/* <Link to="/login">← Go to Login</Link> */}
 
             <p className="title">signup</p>
